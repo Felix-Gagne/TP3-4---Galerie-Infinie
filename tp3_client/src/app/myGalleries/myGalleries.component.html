@@ -1,0 +1,86 @@
+<div class="galleryPage">
+
+  <div class="row galleries">
+    <!-- Titres des la page -->
+    <div class="col-1">
+      <h1>&nbsp;Mes galeries <mat-icon>photo_library</mat-icon></h1>
+    </div>
+  </div>
+
+  <div class="row galleries">
+
+    <div class="col-1 galleryList">
+      <!-- Photos de couverture de galeries -->
+     <div class="galleryThumbnail">
+      <div>Galerie #1</div>
+      <img src="/assets/images/galleryThumbnail.png" alt="Galerie #1">
+     </div>
+
+     <div class="galleryThumbnail">
+      <div>Galerie #2</div>
+      <img src="/assets/images/galleryThumbnail.png" alt="Galerie #2">
+     </div>
+
+     <div class="galleryThumbnail">
+      <div>Galerie #3</div>
+      <img src="/assets/images/galleryThumbnail.png" alt="Galerie #3">
+     </div>
+
+     <div class="galleryThumbnail">
+      <div>Galerie #4</div>
+      <img src="/assets/images/galleryThumbnail.png" alt="Galerie #4">
+     </div>
+
+     <div class="galleryThumbnail">
+      <div>Galerie #5</div>
+      <img src="/assets/images/galleryThumbnail.png" alt="Galerie #5">
+     </div>
+
+     <div class="galleryThumbnail">
+      <div>Galerie #6</div>
+      <img src="/assets/images/galleryThumbnail.png" alt="Galerie #6">
+     </div>
+
+     <div class="galleryThumbnail">
+      <div>Galerie #7</div>
+      <img src="/assets/images/galleryThumbnail.png" alt="Galerie #7">
+     </div>
+
+    </div>
+  
+    <div class="col-4 pictureList">
+      <!-- Options de la galeries -->
+      <div class="options">
+
+        <!-- Changer la couverture (Partie 2 !!) -->
+        <div class="option">
+          <input type="file" name="coverPicture"><button mat-raised-button>Changer la couverture <mat-icon>photo_library</mat-icon></button>
+        </div>
+
+        <!-- Partager la galerie -->
+        <div class="option">
+          <input type="text" name="newOwnerUsername" placeholder="Nom d'utilisateur">
+          <button mat-raised-button color="primary">Partager la galerie <mat-icon>supervised_user_circle</mat-icon></button>
+        </div>
+
+        <!-- Changer la visibilité -->
+        <div class="option">
+          <button mat-raised-button>Rendre privée <mat-icon>verified_user</mat-icon></button>
+          <button mat-raised-button>Rendre publique	<mat-icon>remove_red_eye</mat-icon></button>
+        </div>
+
+        <!-- Supprimer la galerie -->
+        <div class="option">
+          <button mat-raised-button color="warn">Supprimer la galerie <mat-icon>delete</mat-icon></button>
+        </div>
+      </div>
+      
+
+      <hr>
+      <!-- Photo de la galerie sélectionnée (Partie 2 !) -->
+      <h2>Photos de la galerie sélectionnée <mat-icon>photo_camera</mat-icon></h2>
+    </div>
+
+  </div>
+
+</div>

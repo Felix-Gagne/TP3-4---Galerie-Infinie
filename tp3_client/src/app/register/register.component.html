@@ -1,0 +1,20 @@
+<form class="logForm">
+  <h1>Inscription <mat-icon>person</mat-icon></h1>
+  <mat-form-field appearance="fill">
+    <mat-label>Nom d'utilisateur</mat-label>
+    <input matInput name="registerUsername">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Adresse courriel</mat-label>
+    <input matInput name="registerEmail">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Mot de passe</mat-label>
+    <input matInput name="registerPassword" matTooltip="Au moins 6 caractères." matTooltipPosition="right">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Confirmer le mot de passe</mat-label>
+    <input matInput name="registerPasswordConfirm">
+  </mat-form-field>
+  <button mat-raised-button (click)="register()">S'inscrire</button>
+</form>

@@ -1,0 +1,104 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.logForm{
+    margin:auto;
+    margin-top:20px;
+    width:400px;
+    color:#3649ad;
+}
+.logForm mat-form-field{
+    width:100%;
+}
+.logForm h1 mat-icon{
+    vertical-align: middle;
+}
+
+.mat-tooltip{
+    font-size:1em;
+}
+
+.galleryPage{
+    margin:0px;
+}
+
+.galleryPage h1 mat-icon, .galleryPage h2 mat-icon{
+    vertical-align: middle;
+}
+
+.row{
+    display:flex;
+}
+
+.col-1{
+    flex:1;
+    background-color:#f7f7f7;
+}
+
+.galleries [class^="col"]{
+    padding:5px;
+}
+
+.col-4{
+    flex:4;
+    background-color:#fcfcfc;
+}
+
+.galleries{
+    gap:3px;
+    margin:2px 0px 2px 0px;
+}
+
+.galleries h1, .galleries h2{
+    margin:0px;
+}
+
+.galleryThumbnail{
+    position:relative;
+    padding:5px;
+}
+
+.galleryThumbnail img{
+    width:100%;
+}
+
+.galleryThumbnail div{
+    position:absolute;
+    color:white;
+    font-weight:bold;
+    left:10px;
+    top:10px;
+}
+
+.galleryList{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: calc(100vh - 130px);
+}
+
+.pictureList{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: calc(100vh - 130px);
+}
+
+.options{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+}
+
+.option:not(:last-child){
+    border-right:black solid 1px;
+}
+
+.option{
+    margin:5px;
+    padding-left:0px;
+    margin-left:0px;
+}
+
+.option button{
+    margin:0px 10px 0px 10px;
+}

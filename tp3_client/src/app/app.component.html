@@ -1,0 +1,36 @@
+<div>
+  <mat-toolbar color="primary">
+
+    <!-- Menu de navigation -->
+    <button mat-icon-button [matMenuTriggerFor]="menuNav" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menuNav="matMenu">
+      <button mat-menu-item [routerLink]="['publicGalleries']">Galeries publiques</button>
+      <button mat-menu-item [routerLink]="['myGalleries']">Mes galeries</button>
+    </mat-menu>
+
+    <!-- Titre -->
+    <span>Super galeries limitées ~Yoink~</span>
+
+    <span class="spacer"></span>
+
+    <!-- Bouton de connexion -->
+    <button mat-button aria-label="Bouton connexion" [routerLink]="['login']">
+      <mat-icon>power</mat-icon>Connexion
+    </button>
+
+    <!-- Bouton d'inscription -->
+    <button mat-button aria-label="Bouton inscription" [routerLink]="['register']">
+      <mat-icon>person</mat-icon>Inscription
+    </button>
+    
+    <!-- Bouton de déconnexion -->
+    <button mat-button aria-label="Bouton déconnexion">
+      <mat-icon>directions_run</mat-icon>Déconnexion
+    </button>
+
+  </mat-toolbar>
+</div>
+
+<router-outlet></router-outlet>
