@@ -1,0 +1,20 @@
+.options h3 mat-icon{
+    vertical-align: middle;
+}
+
+.options h3{
+    margin:5px 0px;
+    margin-right:10px;
+}
+
+.newGallery input{
+    margin-right:10px;
+}
+
+.newGallery button{
+    margin-left:20px;
+}
+
+.pictureList>h3{
+     margin-bottom:0px;
+}

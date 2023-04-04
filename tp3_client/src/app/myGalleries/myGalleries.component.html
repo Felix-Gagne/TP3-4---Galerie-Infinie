@@ -49,9 +49,23 @@
     </div>
   
     <div class="col-4 pictureList">
-      <!-- Options de la galeries -->
-      <div class="options">
+      
+      <div class="options newGallery">
+        <h3>Nouvelle galerie : </h3>
+        <input type="text" name="newGalleryName" placeholder="Nom de la galerie">
 
+        <!-- Pas d'image de couverture pour le moment, n'utilisez pas cet input ! -->
+        <input type="file" name="newGalleryCoverPicture">
+
+        <!-- Cet input peut être relié à une variable booléenne -->
+        <input type="checkbox" name="newGalleryIsPublic">Publique
+
+        <button mat-raised-button>Créer la galerie	<mat-icon>add_to_queue</mat-icon></button>
+      </div>
+      <hr>
+       <!-- Options de la galerie sélectionnée -->
+       <h3>Modifier la galerie sélectionnée : </h3>
+       <div class="options">
         <!-- Changer la couverture (Partie 2 !!) -->
         <div class="option">
           <input type="file" name="coverPicture"><button mat-raised-button>Changer la couverture <mat-icon>photo_library</mat-icon></button>
@@ -74,10 +88,9 @@
           <button mat-raised-button color="warn">Supprimer la galerie <mat-icon>delete</mat-icon></button>
         </div>
       </div>
-      
 
       <hr>
-      <!-- Photo de la galerie sélectionnée (Partie 2 !) -->
+      <!-- Photos de la galerie sélectionnée (Partie 2 !) -->
       <h2>Photos de la galerie sélectionnée <mat-icon>photo_camera</mat-icon></h2>
     </div>
 
