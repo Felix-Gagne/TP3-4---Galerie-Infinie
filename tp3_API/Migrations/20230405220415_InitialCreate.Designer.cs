@@ -12,8 +12,8 @@ using tp3_API.Data;
 namespace tp3_API.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20230405000219_SecondCreate")]
-    partial class SecondCreate
+    [Migration("20230405220415_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

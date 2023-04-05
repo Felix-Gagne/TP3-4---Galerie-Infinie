@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using tp3_API.Data;
 using tp3_API.Models;
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,26 @@ builder.Services.AddDbContext<UserContext>(options =>
 });
 
 builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<UserContext>();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.SaveToken = true;
+    options.RequireHttpsMetadata = false; //Lors du developpement
+    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+    {
+        ValidateAudience = true,
+        ValidateIssuer = true,
+        ValidAudience = "http://localhost:4200", // Client -> HTTP
+        ValidIssuer = "https://localhost:7219", // Serveur -> HTTPS
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+        .GetBytes("LOOOOOOOOOOONGUE PhraSe SinooooooNNNNNN Sa NE marcHe PasssssSSSSSS !"))
+    };
+});
     
 // Add services to the container.
 

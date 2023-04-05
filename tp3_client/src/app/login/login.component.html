@@ -2,11 +2,11 @@
   <h1>Connexion <mat-icon>power</mat-icon></h1>
   <mat-form-field appearance="fill">
     <mat-label>Nom d'utilisateur</mat-label>
-    <input matInput name="loginUsername">
+    <input matInput name="loginUsername" [(ngModel)]="username">
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Mot de passe</mat-label>
-    <input matInput name="loginPassword">
+    <input matInput name="loginPassword" [(ngModel)]="password">
   </mat-form-field>
   <button mat-raised-button (click)="login()">Se connecter</button>
 </form>
