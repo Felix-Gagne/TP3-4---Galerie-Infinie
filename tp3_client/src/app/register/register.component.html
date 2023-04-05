@@ -14,7 +14,7 @@
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Confirmer le mot de passe</mat-label>
-    <input matInput name="registerPasswordConfirm">
+    <input matInput name="registerPasswordConfirm" [(ngModel)]="passwordConfirm">
   </mat-form-field>
   <button mat-raised-button (click)="register()">S'inscrire</button>
 </form>

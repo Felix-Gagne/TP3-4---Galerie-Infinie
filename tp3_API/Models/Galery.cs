@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public bool IsPublic { get; set; }
         public string DefaultImage { get; set; }
-        public List<User> AllowedUser { get; set; }
+        public virtual List<User> AllowedUser { get; set; }
     }
 }

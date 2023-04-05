@@ -269,3 +269,10 @@ C:\Users\felix\Desktop\TP3-4---Galerie-Infinie\tp3_API\obj\Debug\net6.0\refint\t
 C:\Users\felix\Desktop\TP3-4---Galerie-Infinie\tp3_API\obj\Debug\net6.0\tp3_API.pdb
 C:\Users\felix\Desktop\TP3-4---Galerie-Infinie\tp3_API\obj\Debug\net6.0\tp3_API.genruntimeconfig.cache
 C:\Users\felix\Desktop\TP3-4---Galerie-Infinie\tp3_API\obj\Debug\net6.0\ref\tp3_API.dll
+C:\Users\felix\Desktop\TP3-4---Galerie-Infinie\tp3_API\bin\Debug\net6.0\Castle.Core.dll
+C:\Users\felix\Desktop\TP3-4---Galerie-Infinie\tp3_API\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\felix\Desktop\TP3-4---Galerie-Infinie\tp3_API\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\felix\Desktop\TP3-4---Galerie-Infinie\tp3_API\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\felix\Desktop\TP3-4---Galerie-Infinie\tp3_API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Proxies.dll
+C:\Users\felix\Desktop\TP3-4---Galerie-Infinie\tp3_API\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\felix\Desktop\TP3-4---Galerie-Infinie\tp3_API\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
