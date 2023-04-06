@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Microsoft.EntityFrameworkCore;
 using tp3_API.Data;
 using tp3_API.Models;
 
 namespace tp3_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class GaleryController : ControllerBase
     {
         private readonly UserContext _context;
@@ -86,14 +90,20 @@ namespace tp3_API.Controllers
         [HttpPost]
         public async Task<ActionResult<Galery>> PostGalery(Galery galery)
         {
-          if (_context.Galery == null)
-          {
-              return Problem("Entity set 'tp3_GaleryContext.Galery'  is null.");
-          }
-            _context.Galery.Add(galery);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGalery", new { id = galery.Id }, galery);
+                string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                User? user = await _context.Users.FindAsync(userId);
+
+                // Ajouter les references
+                galery.AllowedUser = new List<User>();
+                galery.AllowedUser.Add(user);
+                user.Galery.Add(galery);
+
+                // Populer la base de donner
+                _context.Galery.Add(galery);
+                await _context.SaveChangesAsync();
+                return CreatedAtAction("GetGalery", new { id = galery.Id }, galery);
+
         }
 
         // DELETE: api/Galery/5

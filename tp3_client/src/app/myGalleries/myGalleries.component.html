@@ -52,15 +52,15 @@
       
       <div class="options newGallery">
         <h3>Nouvelle galerie : </h3>
-        <input type="text" name="newGalleryName" placeholder="Nom de la galerie">
+        <input type="text" name="newGalleryName" placeholder="Nom de la galerie" [(ngModel)]="name">
 
         <!-- Pas d'image de couverture pour le moment, n'utilisez pas cet input ! -->
         <input type="file" name="newGalleryCoverPicture">
 
         <!-- Cet input peut être relié à une variable booléenne -->
-        <input type="checkbox" name="newGalleryIsPublic">Publique
+        <input type="checkbox" name="newGalleryIsPublic" [(ngModel)]="isPublic">Publique
 
-        <button mat-raised-button>Créer la galerie	<mat-icon>add_to_queue</mat-icon></button>
+        <button mat-raised-button (click)="newGalery()">Créer la galerie	<mat-icon>add_to_queue</mat-icon></button>
       </div>
       <hr>
        <!-- Options de la galerie sélectionnée -->

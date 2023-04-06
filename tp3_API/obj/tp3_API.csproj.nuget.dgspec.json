@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\felix\\Desktop\\Repo Hiver 2023\\Prog web service\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj": {}
+    "C:\\Users\\felix\\Desktop\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\felix\\Desktop\\Repo Hiver 2023\\Prog web service\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj": {
+    "C:\\Users\\felix\\Desktop\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\felix\\Desktop\\Repo Hiver 2023\\Prog web service\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj",
+        "projectUniqueName": "C:\\Users\\felix\\Desktop\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj",
         "projectName": "tp3_API",
-        "projectPath": "C:\\Users\\felix\\Desktop\\Repo Hiver 2023\\Prog web service\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj",
+        "projectPath": "C:\\Users\\felix\\Desktop\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj",
         "packagesPath": "C:\\Users\\felix\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\felix\\Desktop\\Repo Hiver 2023\\Prog web service\\TP3-4---Galerie-Infinie\\tp3_API\\obj\\",
+        "outputPath": "C:\\Users\\felix\\Desktop\\TP3-4---Galerie-Infinie\\tp3_API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
