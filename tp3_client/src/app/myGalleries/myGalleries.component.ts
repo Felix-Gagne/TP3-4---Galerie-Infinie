@@ -1,7 +1,8 @@
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Galery } from '../Models/Galery';
 import { lastValueFrom } from 'rxjs';
+import { Galery } from '../Models/Galery';
 
 @Component({
   selector: 'app-myGalleries',
@@ -14,12 +15,16 @@ export class MyGalleriesComponent implements OnInit {
   isPublic : boolean = false;
   defaultImage : string = "/assets/images/galleryThumbnail.png";
 
+  galeries : Galery[] = [];
+
 
   constructor(public http : HttpClient) { }
 
-  ngOnInit() 
+  async ngOnInit() 
   {
-
+    await this.getMyGaleries();
+    console.log("La liste : " + this.galeries);
+    console.log(this.galeries[0].name);
   }
 
   async newGalery() : Promise<void>{
@@ -43,6 +48,24 @@ export class MyGalleriesComponent implements OnInit {
 
     let x = await lastValueFrom(this.http.post<any>("https://localhost:7219/api/Galery/PostGalery", galery, httpOptions));
     console.log(x);
+
+    await this.getMyGaleries();
+  }
+
+  async getMyGaleries() : Promise<void>
+  {
+      let token = localStorage.getItem("token");
+
+      let httpOptions = {
+        headers : new HttpHeaders({
+          'Content-Type' : 'application/json',
+          'Authorization' : 'Bearer ' + token
+        })
+      };
+
+      let x = await lastValueFrom(this.http.get<Galery[]>("https://localhost:7219/api/Galery/GetGalery", httpOptions));
+      console.log(x);
+      this.galeries = x;
   }
 
 }

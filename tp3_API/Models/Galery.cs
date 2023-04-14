@@ -1,5 +1,5 @@
 ﻿using Microsoft.Build.Framework;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace tp3_API.Models
 {
@@ -15,6 +15,6 @@ namespace tp3_API.Models
         public string DefaultImage { get; set; }
 
         [JsonIgnore]
-        public virtual List<User> AllowedUser { get; set; }
+        public virtual List<User>? AllowedUser { get; set; }
     }
 }

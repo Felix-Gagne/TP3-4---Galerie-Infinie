@@ -29,11 +29,17 @@ namespace tp3_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Galery>>> GetGalery()
         {
-          if (_context.Galery == null)
-          {
-              return NotFound();
-          }
-            return await _context.Galery.ToListAsync();
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            User? user = await _context.Users.FindAsync(userId);
+
+            if(user == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return user.Galery;
+            }
         }
 
         // GET: api/Galery/5
@@ -90,20 +96,24 @@ namespace tp3_API.Controllers
         [HttpPost]
         public async Task<ActionResult<Galery>> PostGalery(Galery galery)
         {
+            //Trouver un utilisateur via son token
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            User? user = await _context.Users.FindAsync(userId);
 
-                string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                User? user = await _context.Users.FindAsync(userId);
-
-                // Ajouter les references
+            if(user == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
                 galery.AllowedUser = new List<User>();
                 galery.AllowedUser.Add(user);
                 user.Galery.Add(galery);
-
-                // Populer la base de donner
                 _context.Galery.Add(galery);
                 await _context.SaveChangesAsync();
-                return CreatedAtAction("GetGalery", new { id = galery.Id }, galery);
 
+                return CreatedAtAction("GetGalery", new { id = galery.Id }, galery);
+            }
         }
 
         // DELETE: api/Galery/5

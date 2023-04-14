@@ -48,7 +48,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireDigit = true;
     options.Password.RequireUppercase = true;
     options.Password.RequireLowercase = true;
-    options.Password.RequiredLength = 5;
+    options.Password.RequiredLength = 4;
 });
 
 builder.Services.AddCors(options =>

@@ -1,8 +1,8 @@
 
 
 export class Galery{
-    constructor(public Id : number,
-            public Name : string,
-            public IsPublic : boolean,
-            public DefaultImage : string){}
+    constructor(public id : number,
+            public name : string,
+            public isPublic : boolean,
+            public defaultImage : string){}
 }
