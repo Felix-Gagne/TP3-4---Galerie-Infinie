@@ -11,7 +11,7 @@
 
     <div class="col-1 galleryList">
       <!-- Photos de couverture de galeries -->
-     <div class="galleryThumbnail" *ngFor="let g of galeries">
+     <div class="galleryThumbnail" *ngFor="let g of galeries" (click)="getGaleryInfo(g.id, g.name)">
       <div>{{g.name}}</div>
       <img src="/assets/images/galleryThumbnail.png" alt="Galerie #1">
      </div>
@@ -34,7 +34,7 @@
       </div>
       <hr>
        <!-- Options de la galerie sélectionnée -->
-       <h3>Modifier la galerie sélectionnée : </h3>
+       <h3>Modifier la galerie sélectionnée : {{galeryName}}</h3>
        <div class="options">
         <!-- Changer la couverture (Partie 2 !!) -->
         <div class="option">
@@ -43,8 +43,8 @@
 
         <!-- Partager la galerie -->
         <div class="option">
-          <input type="text" name="newOwnerUsername" placeholder="Nom d'utilisateur">
-          <button mat-raised-button color="primary">Partager la galerie <mat-icon>supervised_user_circle</mat-icon></button>
+          <input type="text" name="newOwnerUsername" placeholder="Nom d'utilisateur" [(ngModel)]="username">
+          <button mat-raised-button color="primary" (click)="addUser()">Partager la galerie <mat-icon>supervised_user_circle</mat-icon></button>
         </div>
 
         <!-- Changer la visibilité -->
@@ -55,7 +55,7 @@
 
         <!-- Supprimer la galerie -->
         <div class="option">
-          <button mat-raised-button color="warn">Supprimer la galerie <mat-icon>delete</mat-icon></button>
+          <button mat-raised-button color="warn" (click)="deleteGalery()">Supprimer la galerie <mat-icon>delete</mat-icon></button>
         </div>
       </div>
 

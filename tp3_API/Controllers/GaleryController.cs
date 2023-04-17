@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Microsoft.EntityFrameworkCore;
 using tp3_API.Data;
@@ -25,14 +27,14 @@ namespace tp3_API.Controllers
             _context = context;
         }
 
-        // GET: api/Galery
+        // GET USER GALERY
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Galery>>> GetGalery()
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            User? user = await _context.Users.FindAsync(userId);
+            User user = _context.Users.Single(u => u.Id == userId);
 
-            if(user == null)
+            if (user == null)
             {
                 return BadRequest();
             }
@@ -42,22 +44,31 @@ namespace tp3_API.Controllers
             }
         }
 
-        // GET: api/Galery/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Galery>> GetGalery(int id)
+        // GET ALL PUBLIC GALERIES
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Galery>>> GetPublicGaleries()
         {
-          if (_context.Galery == null)
-          {
-              return NotFound();
-          }
-            var galery = await _context.Galery.FindAsync(id);
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            User user = _context.Users.Single(u => u.Id == userId);
 
-            if (galery == null)
+            if (user == null)
             {
-                return NotFound();
+                return BadRequest();
             }
+            else
+            {
+                List<Galery> galeries = new List<Galery>();
 
-            return galery;
+                foreach(Galery g in _context.Galery)
+                {
+                    if(g.IsPublic == true && !g.AllowedUser.Contains(user))
+                    {
+                        galeries.Add(g);
+                    }
+                }
+
+                return galeries;
+            }
         }
 
         // PUT: api/Galery/5
@@ -98,9 +109,9 @@ namespace tp3_API.Controllers
         {
             //Trouver un utilisateur via son token
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            User? user = await _context.Users.FindAsync(userId);
+            User user = _context.Users.Single(u => u.Id == userId);
 
-            if(user == null)
+            if (user == null)
             {
                 return BadRequest();
             }
@@ -116,21 +127,119 @@ namespace tp3_API.Controllers
             }
         }
 
-        // DELETE: api/Galery/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGalery(int id)
+        // ADD A USER
+        [HttpPut("{id}/{username}")]
+        public async Task<IActionResult> AddUser(int id, string username)
         {
-            if (_context.Galery == null)
-            {
-                return NotFound();
-            }
             var galery = await _context.Galery.FindAsync(id);
             if (galery == null)
             {
                 return NotFound();
             }
 
-            _context.Galery.Remove(galery);
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            User user = _context.Users.Single(u => u.Id == userId);
+
+            if(!galery.AllowedUser.Contains(user))
+            {
+                return BadRequest();
+            }
+
+            foreach(User u in _context.Users)
+            {
+                if(u.UserName.ToLower() == username.ToLower())
+                {
+                    galery.AllowedUser.Add(u);
+                    u.Galery.Add(galery);
+                }
+            }
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+
+        //MAKE IT PUBLIC
+        [HttpPut("{id}")]
+        public async Task<IActionResult> MakePublic(int id, string username)
+        {
+            var galery = await _context.Galery.FindAsync(id);
+            if (galery == null)
+            {
+                return NotFound();
+            }
+
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            User user = _context.Users.Single(u => u.Id == userId);
+
+            if (!galery.AllowedUser.Contains(user) || galery.IsPublic == true)
+            {
+                return BadRequest();
+            }
+
+            galery.IsPublic = true;
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        //MAKE IT PRIVATE
+        [HttpPut("{id}")]
+        public async Task<IActionResult> MakePrivate(int id)
+        {
+            var galery = await _context.Galery.FindAsync(id);
+            if (galery == null)
+            {
+                return NotFound();
+            }
+
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            User user = _context.Users.Single(u => u.Id == userId);
+
+            if (!galery.AllowedUser.Contains(user) || galery.IsPublic == false)
+            {
+                return BadRequest();
+            }
+
+            galery.IsPublic = false;
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        
+        }
+
+
+        // DELETE: api/Galery/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteGalery(int id)
+        {
+            var gallery = await _context.Galery.FindAsync(id);
+
+            if (gallery == null)
+            {
+                return NotFound();
+            }
+
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            User user = _context.Users.Single(u => u.Id == userId);
+
+            if(!gallery.AllowedUser.Contains(user))
+            {
+                return BadRequest();
+            }
+
+            List<User> AllowesUsers = gallery.AllowedUser;
+            foreach(User allowedUser in AllowesUsers)
+            {
+                allowedUser.Galery.Remove(gallery);
+            }
+
+            gallery.AllowedUser.Clear();
+
+            _context.Galery.Remove(gallery);
             await _context.SaveChangesAsync();
 
             return NoContent();
