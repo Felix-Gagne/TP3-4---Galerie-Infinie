@@ -12,40 +12,17 @@ export class GalleryServices {
     constructor(public http : HttpClient){}
 
     async newGalery(name : string, isPublic : boolean, defaultImage : string) : Promise<void>{
-
-        let token = localStorage.getItem("token");
-    
-        console.log("Token : ", token);
-        
-        let httpOptions = {
-          headers : new HttpHeaders({
-            'Content-Type' : 'application/json',
-            'Authorization' : 'Bearer ' + token
-          })
-        };
-    
-        console.log("bearer : ", httpOptions);
-    
         let galery = new Galery(0, name, isPublic, defaultImage);
     
         console.log("Galery : ", galery);
     
-        let x = await lastValueFrom(this.http.post<any>("https://localhost:7219/api/Galery/PostGalery", galery, httpOptions));
+        let x = await lastValueFrom(this.http.post<any>("https://localhost:7219/api/Galery/PostGalery", galery));
         console.log(x);
       }
     
       async getMyGaleries() : Promise<Galery[]>
       {
-          let token = localStorage.getItem("token");
-    
-          let httpOptions = {
-            headers : new HttpHeaders({
-              'Content-Type' : 'application/json',
-              'Authorization' : 'Bearer ' + token
-            })
-          };
-    
-          let x = await lastValueFrom(this.http.get<Galery[]>("https://localhost:7219/api/Galery/GetGalery", httpOptions));
+          let x = await lastValueFrom(this.http.get<Galery[]>("https://localhost:7219/api/Galery/GetGalery"));
           console.log(x);
         
           let galeries : Galery[]
@@ -56,66 +33,19 @@ export class GalleryServices {
       }
     
       async deleteGalery(galeryId : number) : Promise<void>{
-    
-        let token = localStorage.getItem("token");
-    
-        let httpOptions = {
-          headers : new HttpHeaders({
-            'Content-Type' : 'application/json',
-            'Authorization' : 'Bearer ' + token
-          })
-        };
-    
-        let x = await lastValueFrom(this.http.delete<Galery>("https://localhost:7219/api/Galery/DeleteGalery/" + galeryId, httpOptions));
+        let x = await lastValueFrom(this.http.delete<Galery>("https://localhost:7219/api/Galery/DeleteGalery/" + galeryId));
       }
     
       async addUser(galeryId : number, username : string) : Promise<void>{
-        
-        let token = localStorage.getItem("token");
-    
-        console.log(token);
-    
-        let httpOptions = {
-          headers : new HttpHeaders({
-            'Content-Type' : 'application/json',
-            'Authorization' : 'Bearer ' + token
-          })
-        };
-    
-        let x = await lastValueFrom(this.http.put<Galery>("https://localhost:7219/api/Galery/AddUser/" + galeryId + "/" + username, null, httpOptions));
-    
+        let x = await lastValueFrom(this.http.put<Galery>("https://localhost:7219/api/Galery/AddUser/" + galeryId + "/" + username, null));
       }
     
       async makePublic(galeryId : number) : Promise<void>{
-    
-        let token = localStorage.getItem("token");
-    
-        let httpOptions = {
-          headers : new HttpHeaders({
-            'Content-Type' : 'application/json',
-            'Authorization' : 'Bearer ' + token
-          })
-        };
-    
-        let y : boolean = true;
-    
-        let x = await lastValueFrom(this.http.put<Galery>("https://localhost:7219/api/Galery/MakePublic/" + galeryId, null, httpOptions));
+        let x = await lastValueFrom(this.http.put<Galery>("https://localhost:7219/api/Galery/MakePublic/" + galeryId, null));
       }
     
       async makePrivate(galeryId : number) : Promise<void>{
-    
-        let token = localStorage.getItem("token");
-    
-        let httpOptions = {
-          headers : new HttpHeaders({
-            'Content-Type' : 'application/json',
-            'Authorization' : 'Bearer ' + token
-          })
-        };
-    
-        let y : boolean = true;
-    
-        let x = await lastValueFrom(this.http.put<Galery>("https://localhost:7219/api/Galery/MakePrivate/" + galeryId, null, httpOptions));
+        let x = await lastValueFrom(this.http.put<Galery>("https://localhost:7219/api/Galery/MakePrivate/" + galeryId, null));
       }
 
 }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { Galery } from '../Models/Galery';
 import { RegisterDTO } from '../Models/RegisterDTO';
+import { UserServices } from '../services/user-services';
 
 @Component({
   selector: 'app-register',
@@ -18,23 +19,13 @@ export class RegisterComponent implements OnInit {
   passwordConfirm : string = "";
 
 
-  constructor(public router : Router, public http : HttpClient) { }
+  constructor(public router : Router, public http : HttpClient, public service : UserServices) { }
 
   ngOnInit() {
   }
 
-  async register() : Promise<void> {
-
-      let registerDTO = new RegisterDTO(
-        this.username,
-        this.email,
-        this.password,
-        this.passwordConfirm);
-
-        let x = await lastValueFrom(this.http.post<RegisterDTO>("https://localhost:7219/api/Users/Register", registerDTO))
-
-        console.log(x);
-
-        this.router.navigate(['/login']);
+  async register(){
+    await this.service.register(this.username, this.email, this.password, this.passwordConfirm);
+    await this.service.login(this.username, this.password);
   }
 }
