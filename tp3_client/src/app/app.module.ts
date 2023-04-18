@@ -11,6 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { PublicGalleriesComponent } from './publicGalleries/publicGalleries.component';
 import { MyGalleriesComponent } from './myGalleries/myGalleries.component';
 import { LoginComponent } from './login/login.component';
+import { GalleryServices } from './services/gallery-services';
 
 @NgModule({
   declarations: [				
@@ -28,7 +29,7 @@ import { LoginComponent } from './login/login.component';
     MaterialModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [GalleryServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { Galery } from '../Models/Galery';
+import { GalleryServices } from '../services/gallery-services';
 
 @Component({
   selector: 'app-myGalleries',
@@ -23,69 +24,36 @@ export class MyGalleriesComponent implements OnInit {
   username : string = "";
 
 
-  constructor(public http : HttpClient) { }
+  constructor(public http : HttpClient, public service : GalleryServices) { }
 
   async ngOnInit() 
   {
-    await this.getMyGaleries();
-    console.log("La liste : " + this.galeries);
+    this.galeries = await this.service.getMyGaleries();
   }
 
-  async newGalery() : Promise<void>{
-
-    let token = localStorage.getItem("token");
-
-    console.log("Token : ", token);
-    
-    let httpOptions = {
-      headers : new HttpHeaders({
-        'Content-Type' : 'application/json',
-        'Authorization' : 'Bearer ' + token
-      })
-    };
-
-    console.log("bearer : ", httpOptions);
-
-    let galery = new Galery(0, this.name, this.isPublic, this.defaultImage);
-
-    console.log("Galery : ", galery);
-
-    let x = await lastValueFrom(this.http.post<any>("https://localhost:7219/api/Galery/PostGalery", galery, httpOptions));
-    console.log(x);
-
-    await this.getMyGaleries();
+  async createNewGalery(){
+    await this.service.newGalery(this.name, this.isPublic, this.defaultImage);
+    this.galeries = await this.service.getMyGaleries();
   }
 
-  async getMyGaleries() : Promise<void>
-  {
-      let token = localStorage.getItem("token");
-
-      let httpOptions = {
-        headers : new HttpHeaders({
-          'Content-Type' : 'application/json',
-          'Authorization' : 'Bearer ' + token
-        })
-      };
-
-      let x = await lastValueFrom(this.http.get<Galery[]>("https://localhost:7219/api/Galery/GetGalery", httpOptions));
-      console.log(x);
-      this.galeries = x;
+  async makeGalleryPublic(){
+    await this.service.makePublic(this.galeryId);
+    this.galeries = await this.service.getMyGaleries();
   }
 
-  async deleteGalery() : Promise<void>{
+  async makeGalleryPrivate(){
+    await this.service.makePrivate(this.galeryId);
+    this.galeries = await this.service.getMyGaleries();
+  }
 
-    let token = localStorage.getItem("token");
+  async addAllowedUser(){
+    await this.service.addUser(this.galeryId, this.username);
+    this.galeries = await this.service.getMyGaleries();
+  }
 
-    let httpOptions = {
-      headers : new HttpHeaders({
-        'Content-Type' : 'application/json',
-        'Authorization' : 'Bearer ' + token
-      })
-    };
-
-    let x = await lastValueFrom(this.http.delete<Galery>("https://localhost:7219/api/Galery/DeleteGalery/" + this.galeryId, httpOptions));
-
-    await this.getMyGaleries();
+  async deleteGallery(){
+    await this.service.deleteGalery(this.galeryId);
+    this.galeries = await this.service.getMyGaleries();
   }
 
   getGaleryInfo(id : number, name : string)
@@ -93,25 +61,6 @@ export class MyGalleriesComponent implements OnInit {
     this.galeryId = id;
     this.galeryName = name;
     console.log(this.galeryId, this.galeryName);
-  }
-
-  async addUser() : Promise<void>{
-    
-    let token = localStorage.getItem("token");
-
-    console.log(token);
-
-    let httpOptions = {
-      headers : new HttpHeaders({
-        'Content-Type' : 'application/json',
-        'Authorization' : 'Bearer ' + token
-      })
-    };
-
-    let x = await lastValueFrom(this.http.put<Galery>("https://localhost:7219/api/Galery/AddUser/" + this.galeryId + "/" + this.username, null, httpOptions));
-
-    this.getMyGaleries();
-
   }
 
 }

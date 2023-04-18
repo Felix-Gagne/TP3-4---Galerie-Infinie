@@ -71,37 +71,6 @@ namespace tp3_API.Controllers
             }
         }
 
-        // PUT: api/Galery/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutGalery(int id, Galery galery)
-        {
-            if (id != galery.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(galery).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!GaleryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
         // POST: api/Galery
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -162,7 +131,7 @@ namespace tp3_API.Controllers
 
         //MAKE IT PUBLIC
         [HttpPut("{id}")]
-        public async Task<IActionResult> MakePublic(int id, string username)
+        public async Task<IActionResult> MakePublic(int id)
         {
             var galery = await _context.Galery.FindAsync(id);
             if (galery == null)

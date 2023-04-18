@@ -59,6 +59,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     padding:5px;
 }
 
+.galleryThumbnail img:focus{
+    border: 5px solid black;
+}
+
 .galleryThumbnail img{
     width:100%;
 }
