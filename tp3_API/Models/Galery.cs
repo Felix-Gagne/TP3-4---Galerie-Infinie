@@ -12,9 +12,13 @@ namespace tp3_API.Models
 
         public bool IsPublic { get; set; }
 
-        public string DefaultImage { get; set; }
+        public string? FileName { get; set; }
+
+        public string? MimeType { get; set; }
 
         [JsonIgnore]
         public virtual List<User>? AllowedUser { get; set; }
+
+        public virtual List<Images> Images { get; set; }
     }
 }

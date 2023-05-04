@@ -59,5 +59,6 @@ namespace tp3_API.Data
         }
 
         public DbSet<tp3_API.Models.Galery> Galery { get; set; } = default!;
+        public DbSet<tp3_API.Models.Images> Images { get; set; } = default!;
     }
 }
