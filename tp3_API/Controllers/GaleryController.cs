@@ -214,6 +214,12 @@ namespace tp3_API.Controllers
             return NoContent();
         }
 
+        [HttpPost("id")]
+        public async Task<IActionResult> setGaleryCoverImage(int id)
+        {
+            return null;
+        }
+
         private bool GaleryExists(int id)
         {
             return (_context.Galery?.Any(e => e.Id == id)).GetValueOrDefault();

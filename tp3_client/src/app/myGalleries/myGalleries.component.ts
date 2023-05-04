@@ -1,6 +1,5 @@
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { Galery } from '../Models/Galery';
 import { GalleryServices } from '../services/gallery-services';
@@ -11,6 +10,8 @@ import { GalleryServices } from '../services/gallery-services';
   styleUrls: ['./myGalleries.component.css']
 })
 export class MyGalleriesComponent implements OnInit {
+
+  @ViewChild("myPicureViewChild", {static:false}) pictureInput ?: ElementRef;
 
   name : string = "";
   isPublic : boolean = false;

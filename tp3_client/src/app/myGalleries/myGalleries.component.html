@@ -24,8 +24,8 @@
         <h3>Nouvelle galerie : </h3>
         <input type="text" name="newGalleryName" placeholder="Nom de la galerie" [(ngModel)]="name">
 
-        <!-- Pas d'image de couverture pour le moment, n'utilisez pas cet input ! -->
-        <input type="file" name="newGalleryCoverPicture">
+        <!-- Ajouter une image de couverture -->
+        <input #myPictureViewChild type="file" name="newGalleryCoverPicture" accept="images/*">
 
         <!-- Cet input peut être relié à une variable booléenne -->
         <input type="checkbox" name="newGalleryIsPublic" [(ngModel)]="isPublic">Publique
@@ -36,7 +36,7 @@
        <!-- Options de la galerie sélectionnée -->
        <h3>Modifier la galerie sélectionnée : {{galeryName}}</h3>
        <div class="options">
-        <!-- Changer la couverture (Partie 2 !!) -->
+        <!-- Changer la couverture -->
         <div class="option">
           <input type="file" name="coverPicture"><button mat-raised-button>Changer la couverture <mat-icon>photo_library</mat-icon></button>
         </div>
@@ -60,7 +60,7 @@
       </div>
 
       <hr>
-      <!-- Photos de la galerie sélectionnée (Partie 2 !) -->
+      <!-- Photos de la galerie sélectionnée -->
       <h2>Photos de la galerie sélectionnée <mat-icon>photo_camera</mat-icon></h2>
     </div>
 

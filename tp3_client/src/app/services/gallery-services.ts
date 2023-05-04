@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Galery } from "../Models/Galery";
 import { lastValueFrom } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { ElementRef, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +46,22 @@ export class GalleryServices {
     
       async makePrivate(galeryId : number) : Promise<void>{
         let x = await lastValueFrom(this.http.put<Galery>("https://localhost:7219/api/Galery/MakePrivate/" + galeryId, null));
+      }
+
+      async setCoverPicture(pictureInput ?: ElementRef){
+        if(pictureInput == undefined){
+          console.log("Input HTML non charger.");
+          return;
+        }
+        let file = pictureInput.nativeElement.files[0];
+        if(file == null){
+          console.log("Input HTML ne contient aucune image.")
+          return;
+        }
+        let formData = new FormData();
+        formData.append("monImage", file, file.name);
+
+        
       }
 
 }
