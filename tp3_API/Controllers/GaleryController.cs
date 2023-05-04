@@ -88,6 +88,33 @@ namespace tp3_API.Controllers
             {
                 galery.AllowedUser = new List<User>();
                 galery.AllowedUser.Add(user);
+
+                try
+                {
+                    IFormCollection formCollection = await Request.ReadFormAsync();
+                    IFormFile? file = formCollection.Files.GetFile("monImage");
+                    if(file != null)
+                    {
+                        Image image = Image.Load(file.OpenReadStream());
+
+                        galery.FileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                        galery.MimeType = file.ContentType;
+
+                        image.Save(Directory.GetCurrentDirectory() + "/images/original/" + galery.FileName);
+
+                        _context.Entry(galery).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        return NotFound(new { Message = "Aucune image fournie" });
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
                 user.Galery.Add(galery);
                 _context.Galery.Add(galery);
                 await _context.SaveChangesAsync();
@@ -215,9 +242,47 @@ namespace tp3_API.Controllers
         }
 
         [HttpPost("id")]
+        [DisableRequestSizeLimit]
         public async Task<IActionResult> setGaleryCoverImage(int id)
         {
-            return null;
+            var galery = await _context.Galery.FindAsync(id);
+            if (galery == null)
+            {
+                return NotFound();
+            }
+
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            User user = _context.Users.Single(u => u.Id == userId);
+
+            if (galery.AllowedUser.Contains(user) && user != null)
+            {
+                try
+                {
+                    IFormCollection formCollection = await Request.ReadFormAsync();
+                    IFormFile? file = formCollection.Files.GetFile("monImage");
+                    if (file != null)
+                    {
+                        Image image = Image.Load(file.OpenReadStream());
+
+                        galery.FileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                        galery.MimeType = file.ContentType;
+
+                        image.Save(Directory.GetCurrentDirectory() + "/images/original/" + galery.FileName);
+
+                        _context.Entry(galery).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        return NotFound(new { Message = "Aucune image fournie" });
+                    }
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+            return NoContent();
         }
 
         private bool GaleryExists(int id)
