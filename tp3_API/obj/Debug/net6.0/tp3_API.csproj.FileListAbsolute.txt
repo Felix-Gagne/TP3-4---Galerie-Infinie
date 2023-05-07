@@ -1109,3 +1109,4 @@ C:\Users\felix\Desktop\Repo Hiver 2023\Base de donnée\TP3-4---Galerie-Infinie\t
 C:\Users\felix\Desktop\Repo Hiver 2023\Base de donnée\TP3-4---Galerie-Infinie\tp3_API\obj\Debug\net6.0\tp3_API.pdb
 C:\Users\felix\Desktop\Repo Hiver 2023\Base de donnée\TP3-4---Galerie-Infinie\tp3_API\obj\Debug\net6.0\tp3_API.genruntimeconfig.cache
 C:\Users\felix\Desktop\Repo Hiver 2023\Base de donnée\TP3-4---Galerie-Infinie\tp3_API\obj\Debug\net6.0\ref\tp3_API.dll
+C:\Users\felix\Desktop\TP3-4---Galerie-Infinie\tp3_API\bin\Debug\net6.0\SixLabors.ImageSharp.dll

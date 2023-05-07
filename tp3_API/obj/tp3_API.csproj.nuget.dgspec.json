@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\2070094\\Desktop\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj": {}
+    "C:\\Users\\felix\\Desktop\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\2070094\\Desktop\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj": {
+    "C:\\Users\\felix\\Desktop\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\2070094\\Desktop\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj",
+        "projectUniqueName": "C:\\Users\\felix\\Desktop\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj",
         "projectName": "tp3_API",
-        "projectPath": "C:\\Users\\2070094\\Desktop\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj",
-        "packagesPath": "C:\\Users\\2070094\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\2070094\\Desktop\\TP3-4---Galerie-Infinie\\tp3_API\\obj\\",
+        "projectPath": "C:\\Users\\felix\\Desktop\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj",
+        "packagesPath": "C:\\Users\\felix\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\felix\\Desktop\\TP3-4---Galerie-Infinie\\tp3_API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\2070094\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\felix\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -78,6 +79,10 @@
               "target": "Package",
               "version": "[6.0.13, )"
             },
+            "SixLabors.ImageSharp": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
@@ -89,7 +94,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -101,7 +107,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.309\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

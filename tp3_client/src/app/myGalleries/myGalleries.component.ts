@@ -11,7 +11,8 @@ import { GalleryServices } from '../services/gallery-services';
 })
 export class MyGalleriesComponent implements OnInit {
 
-  @ViewChild("myPicureViewChild", {static:false}) pictureInput ?: ElementRef;
+  @ViewChild("myPictureViewChild", {static:false}) pictureInput ?: ElementRef;
+  @ViewChild("newCoverPicture", {static:false}) newPictureInput ?: ElementRef;
 
   name : string = "";
   isPublic : boolean = false;
@@ -33,7 +34,7 @@ export class MyGalleriesComponent implements OnInit {
   }
 
   async createNewGalery(){
-    await this.service.newGalery(this.name, this.isPublic, this.defaultImage);
+    await this.service.newGalery(this.name, this.isPublic, this.pictureInput);
     this.galeries = await this.service.getMyGaleries();
   }
 
@@ -64,4 +65,8 @@ export class MyGalleriesComponent implements OnInit {
     console.log(this.galeryId, this.galeryName);
   }
 
+  async setNewGaleryCover(){
+    await this.service.setCoverPicture(this.galeryId, this.newPictureInput);
+    this.galeries = await this.service.getMyGaleries();
+  }
 }

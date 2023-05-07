@@ -103,7 +103,6 @@ namespace tp3_API.Controllers
                         image.Save(Directory.GetCurrentDirectory() + "/images/original/" + galery.FileName);
 
                         _context.Entry(galery).State = EntityState.Modified;
-                        await _context.SaveChangesAsync();
                     }
                     else
                     {

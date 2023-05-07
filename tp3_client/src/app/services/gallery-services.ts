@@ -11,7 +11,7 @@ export class GalleryServices {
 
     constructor(public http : HttpClient){}
 
-    async newGalery(name : string, isPublic : boolean, defaultImage : string, pictureInput ?: ElementRef) : Promise<void>{
+    async newGalery(name : string, isPublic : boolean, pictureInput ?: ElementRef) : Promise<void>{
       if(pictureInput == undefined){
         console.log("Input HTML non charger.");
         return;
