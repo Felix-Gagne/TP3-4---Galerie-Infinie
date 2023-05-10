@@ -11,24 +11,25 @@ export class GalleryServices {
 
     constructor(public http : HttpClient){}
 
-    async newGalery(name : string, isPublic : boolean, pictureInput ?: ElementRef) : Promise<void>{
-      if(pictureInput == undefined){
-        console.log("Input HTML non charger.");
-        return;
-      }
-      let file = pictureInput.nativeElement.files[0];
-      if(file == null){
-        console.log("Input HTML ne contient aucune image.")
-        return;
-      }
-      let formData = new FormData();
-      formData.append("monImage", file, file.name);
+    async newGalery(name : string, isPublic : boolean, pictureInput ?: ElementRef) : Promise<void>
+    {
+        if(pictureInput == undefined){
+          console.log("Input HTML non charger.");
+          return;
+        }
+        let file = pictureInput.nativeElement.files[0];
+        if(file == null){
+          console.log("Input HTML ne contient aucune image.")
+          return;
+        }
 
-        let galery = new Galery(0, name, isPublic);
+        let formData = new FormData();
+
+        formData.append("monImage", file, file.name);
+        formData.append("galeryName", name);
+        formData.append("isPublic", isPublic.toString());
     
-        console.log("Galery : ", galery);
-    
-        let x = await lastValueFrom(this.http.post<any>("https://localhost:7219/api/Galery/PostGalery", galery));
+        let x = await lastValueFrom(this.http.post<any>("https://localhost:7219/api/Galery/PostGalery", formData));
         console.log(x);
       }
     
@@ -58,22 +59,6 @@ export class GalleryServices {
     
       async makePrivate(galeryId : number) : Promise<void>{
         let x = await lastValueFrom(this.http.put<Galery>("https://localhost:7219/api/Galery/MakePrivate/" + galeryId, null));
-      }
-
-      async setCoverPicture(galeryId : number, pictureInput ?: ElementRef){
-        if(pictureInput == undefined){
-          console.log("Input HTML non charger.");
-          return;
-        }
-        let file = pictureInput.nativeElement.files[0];
-        if(file == null){
-          console.log("Input HTML ne contient aucune image.")
-          return;
-        }
-        let formData = new FormData();
-        formData.append("monImage", file, file.name);
-
-        let x = await lastValueFrom(this.http.post<Galery>("https://localhost:7219/api/Galery/setGaleryCoverImage" + galeryId, null));
       }
 
 }

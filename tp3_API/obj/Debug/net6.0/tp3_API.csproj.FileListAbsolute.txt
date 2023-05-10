@@ -1111,3 +1111,4 @@ C:\Users\felix\Desktop\Repo Hiver 2023\Base de donnée\TP3-4---Galerie-Infinie\t
 C:\Users\felix\Desktop\Repo Hiver 2023\Base de donnée\TP3-4---Galerie-Infinie\tp3_API\obj\Debug\net6.0\ref\tp3_API.dll
 C:\Users\felix\Desktop\TP3-4---Galerie-Infinie\tp3_API\bin\Debug\net6.0\SixLabors.ImageSharp.dll
 C:\Users\felix\Desktop\Repo Hiver 2023\Prog web service\TP3-4---Galerie-Infinie\tp3_API\bin\Debug\net6.0\SixLabors.ImageSharp.dll
+C:\Users\2070094\Desktop\TP3-4---Galerie-Infinie\tp3_API\bin\Debug\net6.0\SixLabors.ImageSharp.dll

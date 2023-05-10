@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace tp3_API.Migrations
 {
-    public partial class ImageCreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -219,8 +219,8 @@ namespace tp3_API.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "11111111-1111-1111-1111-11111111", 0, "511ea715-9f77-438a-ba3e-c6e088784924", "user1@gmail.com", false, false, null, "USER1@GMAIL.COM", "USER1", "AQAAAAEAACcQAAAAEPHLaX9yL89w+mDrKi/D6djCP5VFDh+HXGa5iJy8T/xBZtk/WrU/xqmP0ScNGSKGYA==", null, false, "63ac8740-0ed1-4ae1-a205-75a5f81043cd", false, "user1" },
-                    { "11111111-1111-1111-1111-11111112", 0, "fe4d3dc2-2979-43a9-855b-ac6bb0dc2bae", "user2@gmail.com", false, false, null, "USER2@GMAIL.COM", "USER2", "AQAAAAEAACcQAAAAEH6euBnNhnnL3DgfgkJbtEzOQYKounTq86ZhjHEHCwjjPpFZu1m/BESMLSU/YEphPw==", null, false, "03d67d0b-1ce7-47ec-bc91-83f1d4dee90e", false, "user2" }
+                    { "11111111-1111-1111-1111-11111111", 0, "27db89aa-b76e-4a20-8282-075585f0d001", "user1@gmail.com", false, false, null, "USER1@GMAIL.COM", "USER1", "AQAAAAEAACcQAAAAEETXJ2hqIoB4ejQHGtcWNczuVJoJlGtVwAXUJ9DIK9+bXhTMPcJ5II/zNHdNMfRlWg==", null, false, "803c8d47-051f-4cfe-bd7f-5a1cd95d7444", false, "user1" },
+                    { "11111111-1111-1111-1111-11111112", 0, "fb2efa4c-9633-450a-bd0f-95a5138b976d", "user2@gmail.com", false, false, null, "USER2@GMAIL.COM", "USER2", "AQAAAAEAACcQAAAAEDB++xtgCowhsd2/tKc7wFRLt5Bn/P89Ion2ZwFZLyZOGP7ycr5wmoC6ZJe5laBCWQ==", null, false, "56aab699-1706-489f-b1ae-f28bf5249737", false, "user2" }
                 });
 
             migrationBuilder.InsertData(
@@ -228,8 +228,8 @@ namespace tp3_API.Migrations
                 columns: new[] { "Id", "FileName", "IsPublic", "MimeType", "Name" },
                 values: new object[,]
                 {
-                    { 1, null, true, null, "Test Publique" },
-                    { 2, null, false, null, "Test Privée" }
+                    { 1, "11111111-1111-1111-1111-111111111111.png", true, "image/png", "Test Publique" },
+                    { 2, "11111111-1111-1111-1111-111111111111.png", false, "image/png", "Test Privée" }
                 });
 
             migrationBuilder.InsertData(

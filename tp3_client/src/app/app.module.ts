@@ -15,6 +15,7 @@ import { GalleryServices } from './services/gallery-services';
 import { UserServices } from './services/user-services';
 import { AuthInterceptor } from './auth.interceptor';
 import { ImageServices } from './services/image-services';
+import { PicturePipe } from './pipe/picture.pipe';
 
 @NgModule({
   declarations: [				
@@ -22,7 +23,8 @@ import { ImageServices } from './services/image-services';
       RegisterComponent,
       PublicGalleriesComponent,
       MyGalleriesComponent,
-      LoginComponent
+      LoginComponent,
+      PicturePipe
    ],
   imports: [
     BrowserModule,

@@ -67,11 +67,6 @@ export class MyGalleriesComponent implements OnInit {
     console.log(this.galeryId, this.galeryName);
   }
 
-  async setNewGaleryCover(){
-    await this.service.setCoverPicture(this.galeryId, this.newPictureInput);
-    this.galeries = await this.service.getMyGaleries();
-  }
-
   async addImageToGalery(){
     if(this.addPictureInput != undefined){
       await this.iService.addPicture(this.addPictureInput, this.galeryId);

@@ -211,13 +211,17 @@ namespace tp3_API.Migrations
                         new
                         {
                             Id = 1,
+                            FileName = "11111111-1111-1111-1111-111111111111.png",
                             IsPublic = true,
+                            MimeType = "image/png",
                             Name = "Test Publique"
                         },
                         new
                         {
                             Id = 2,
+                            FileName = "11111111-1111-1111-1111-111111111111.png",
                             IsPublic = false,
+                            MimeType = "image/png",
                             Name = "Test Privée"
                         });
                 });
@@ -315,15 +319,15 @@ namespace tp3_API.Migrations
                         {
                             Id = "11111111-1111-1111-1111-11111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "511ea715-9f77-438a-ba3e-c6e088784924",
+                            ConcurrencyStamp = "27db89aa-b76e-4a20-8282-075585f0d001",
                             Email = "user1@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@GMAIL.COM",
                             NormalizedUserName = "USER1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPHLaX9yL89w+mDrKi/D6djCP5VFDh+HXGa5iJy8T/xBZtk/WrU/xqmP0ScNGSKGYA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEETXJ2hqIoB4ejQHGtcWNczuVJoJlGtVwAXUJ9DIK9+bXhTMPcJ5II/zNHdNMfRlWg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "63ac8740-0ed1-4ae1-a205-75a5f81043cd",
+                            SecurityStamp = "803c8d47-051f-4cfe-bd7f-5a1cd95d7444",
                             TwoFactorEnabled = false,
                             UserName = "user1"
                         },
@@ -331,15 +335,15 @@ namespace tp3_API.Migrations
                         {
                             Id = "11111111-1111-1111-1111-11111112",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fe4d3dc2-2979-43a9-855b-ac6bb0dc2bae",
+                            ConcurrencyStamp = "fb2efa4c-9633-450a-bd0f-95a5138b976d",
                             Email = "user2@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER2@GMAIL.COM",
                             NormalizedUserName = "USER2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH6euBnNhnnL3DgfgkJbtEzOQYKounTq86ZhjHEHCwjjPpFZu1m/BESMLSU/YEphPw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDB++xtgCowhsd2/tKc7wFRLt5Bn/P89Ion2ZwFZLyZOGP7ycr5wmoC6ZJe5laBCWQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "03d67d0b-1ce7-47ec-bc91-83f1d4dee90e",
+                            SecurityStamp = "56aab699-1706-489f-b1ae-f28bf5249737",
                             TwoFactorEnabled = false,
                             UserName = "user2"
                         });

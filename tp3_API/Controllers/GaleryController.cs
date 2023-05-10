@@ -17,7 +17,7 @@ namespace tp3_API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class GaleryController : ControllerBase
     {
         private readonly UserContext _context;
@@ -74,7 +74,7 @@ namespace tp3_API.Controllers
         // POST: api/Galery
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Galery>> PostGalery(Galery galery)
+        public async Task<ActionResult<Galery>> PostGalery()
         {
             //Trouver un utilisateur via son token
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -86,6 +86,21 @@ namespace tp3_API.Controllers
             }
             else
             {
+                string? galeryName = Request.Form["galeryName"];
+                string? boolEnString = Request.Form["isPublic"];
+                if(galeryName == null || boolEnString == null)
+                {
+                    return BadRequest("Il manque des données");
+                }
+
+                bool isPublic = bool.Parse(boolEnString);
+
+                Galery galery = new Galery()
+                {
+                    Id = 0,
+                    Name = galeryName,
+                    IsPublic = isPublic
+                };
                 galery.AllowedUser = new List<User>();
                 galery.AllowedUser.Add(user);
 
@@ -100,9 +115,7 @@ namespace tp3_API.Controllers
                         galery.FileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                         galery.MimeType = file.ContentType;
 
-                        image.Save(Directory.GetCurrentDirectory() + "/images/original/" + galery.FileName);
-
-                        _context.Entry(galery).State = EntityState.Modified;
+                        image.Save(Directory.GetCurrentDirectory() + "/images/cover/" + galery.FileName);
                     }
                     else
                     {
@@ -238,6 +251,22 @@ namespace tp3_API.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> getGaleryCoverPicture(int id)
+        {
+            if(_context.Galery == null)
+            {
+                return NotFound();
+            }
+            Galery? galery = await _context.Galery.FindAsync(id);
+            if(galery == null || galery.FileName == null || galery.MimeType == null)
+            {
+                return NotFound(new { Message = "Cette galerie n'a pas de photo." });
+            }
+            byte[] bytes = System.IO.File.ReadAllBytes(Directory.GetCurrentDirectory() + "/images/cover/" + galery.FileName);
+            return File(bytes, galery.MimeType);
         }
 
         private bool GaleryExists(int id)

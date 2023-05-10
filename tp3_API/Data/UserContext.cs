@@ -42,8 +42,8 @@ namespace tp3_API.Data
             builder.Entity<User>().HasData(u1, u2);
 
             builder.Entity<Galery>().HasData(
-                new { Id = 1, Name = "Test Publique", IsPublic = true, DefaultImage = "/assets/images/galleryThumbnail.png" },
-                new { Id = 2, Name = "Test Privée", IsPublic = false, DefaultImage = "/assets/images/galleryThumbnail.png" }
+                new { Id = 1, Name = "Test Publique", IsPublic = true, FileName = "11111111-1111-1111-1111-111111111111.png", MimeType = "image/png"},
+                new { Id = 2, Name = "Test Privée", IsPublic = false, FileName = "11111111-1111-1111-1111-111111111111.png", MimeType = "image/png"}
             );
 
             builder.Entity<Galery>()
