@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace tp3_API.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class ImageCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -56,7 +56,8 @@ namespace tp3_API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsPublic = table.Column<bool>(type: "bit", nullable: false),
-                    DefaultImage = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MimeType = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -193,6 +194,54 @@ namespace tp3_API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MimeType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GaleryId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Images_Galery_GaleryId",
+                        column: x => x.GaleryId,
+                        principalTable: "Galery",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "11111111-1111-1111-1111-11111111", 0, "511ea715-9f77-438a-ba3e-c6e088784924", "user1@gmail.com", false, false, null, "USER1@GMAIL.COM", "USER1", "AQAAAAEAACcQAAAAEPHLaX9yL89w+mDrKi/D6djCP5VFDh+HXGa5iJy8T/xBZtk/WrU/xqmP0ScNGSKGYA==", null, false, "63ac8740-0ed1-4ae1-a205-75a5f81043cd", false, "user1" },
+                    { "11111111-1111-1111-1111-11111112", 0, "fe4d3dc2-2979-43a9-855b-ac6bb0dc2bae", "user2@gmail.com", false, false, null, "USER2@GMAIL.COM", "USER2", "AQAAAAEAACcQAAAAEH6euBnNhnnL3DgfgkJbtEzOQYKounTq86ZhjHEHCwjjPpFZu1m/BESMLSU/YEphPw==", null, false, "03d67d0b-1ce7-47ec-bc91-83f1d4dee90e", false, "user2" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Galery",
+                columns: new[] { "Id", "FileName", "IsPublic", "MimeType", "Name" },
+                values: new object[,]
+                {
+                    { 1, null, true, null, "Test Publique" },
+                    { 2, null, false, null, "Test Privée" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "GaleryUser",
+                columns: new[] { "AllowedUserId", "GaleryId" },
+                values: new object[] { "11111111-1111-1111-1111-11111111", 1 });
+
+            migrationBuilder.InsertData(
+                table: "GaleryUser",
+                columns: new[] { "AllowedUserId", "GaleryId" },
+                values: new object[] { "11111111-1111-1111-1111-11111112", 2 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -236,6 +285,11 @@ namespace tp3_API.Migrations
                 name: "IX_GaleryUser_GaleryId",
                 table: "GaleryUser",
                 column: "GaleryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Images_GaleryId",
+                table: "Images",
+                column: "GaleryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -257,6 +311,9 @@ namespace tp3_API.Migrations
 
             migrationBuilder.DropTable(
                 name: "GaleryUser");
+
+            migrationBuilder.DropTable(
+                name: "Images");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

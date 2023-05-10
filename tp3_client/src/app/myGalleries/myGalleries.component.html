@@ -57,6 +57,12 @@
         <div class="option">
           <button mat-raised-button color="warn" (click)="deleteGallery()">Supprimer la galerie <mat-icon>delete</mat-icon></button>
         </div>
+        
+        <div class="option">
+          <input #addPicture type="file" name="picture">
+          <button mat-raised-button (click)="addImageToGalery()">Ajouter une photo <mat-icon>note_add</mat-icon></button>
+        </div>
+
       </div>
 
       <hr>

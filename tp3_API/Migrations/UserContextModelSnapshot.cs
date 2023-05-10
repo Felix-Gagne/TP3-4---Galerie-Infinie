@@ -239,10 +239,6 @@ namespace tp3_API.Migrations
                     b.Property<string>("MimeType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("GaleryId");
@@ -319,15 +315,15 @@ namespace tp3_API.Migrations
                         {
                             Id = "11111111-1111-1111-1111-11111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9ef7cbad-da84-4243-8adc-b402162f5043",
+                            ConcurrencyStamp = "511ea715-9f77-438a-ba3e-c6e088784924",
                             Email = "user1@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@GMAIL.COM",
                             NormalizedUserName = "USER1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFvmhv4EM1sTnW/hjtDzDt7ob3icI6TSP7F7Hby1GMuC2/EDLHSU+Bm0CwMFXKj6lA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPHLaX9yL89w+mDrKi/D6djCP5VFDh+HXGa5iJy8T/xBZtk/WrU/xqmP0ScNGSKGYA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7b7ce327-8e59-46c3-8dbc-38d988df7366",
+                            SecurityStamp = "63ac8740-0ed1-4ae1-a205-75a5f81043cd",
                             TwoFactorEnabled = false,
                             UserName = "user1"
                         },
@@ -335,15 +331,15 @@ namespace tp3_API.Migrations
                         {
                             Id = "11111111-1111-1111-1111-11111112",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b2372cdc-f6fc-4b4d-80c7-c0d40ca71ec2",
+                            ConcurrencyStamp = "fe4d3dc2-2979-43a9-855b-ac6bb0dc2bae",
                             Email = "user2@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER2@GMAIL.COM",
                             NormalizedUserName = "USER2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFWAfAmQ19+FilAG/cW2/4skfgLnqoDpPrL4s1nrf49o0WYrClhX4weMNFI+AoR38Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH6euBnNhnnL3DgfgkJbtEzOQYKounTq86ZhjHEHCwjjPpFZu1m/BESMLSU/YEphPw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "34f67cac-a078-4c43-bf31-2c85b55d3855",
+                            SecurityStamp = "03d67d0b-1ce7-47ec-bc91-83f1d4dee90e",
                             TwoFactorEnabled = false,
                             UserName = "user2"
                         });

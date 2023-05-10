@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cl2lWL/WnF/gaZRR+Fw/yTvxtJnesk+dcye9p0UK2Iab/2vRqMQKzOnzho8d206+aOWvjavqEeCmubGIN5XiOQ==",
+  "dgSpecHash": "UkfHkjqz+OPw8uSREbn+JnfG1HRfcO9T2i18g+h6LvOM9kMc2FgNqn8bOGuCL7VL2MFvAzm9DKKJyTYZK3esAg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\felix\\Desktop\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj",
+  "projectFilePath": "C:\\Users\\felix\\Desktop\\Repo Hiver 2023\\Prog web service\\TP3-4---Galerie-Infinie\\tp3_API\\tp3_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\felix\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

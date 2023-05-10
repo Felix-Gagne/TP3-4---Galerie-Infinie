@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { Galery } from '../Models/Galery';
 import { GalleryServices } from '../services/gallery-services';
+import { ImageServices } from '../services/image-services';
 
 @Component({
   selector: 'app-myGalleries',
@@ -13,6 +14,7 @@ export class MyGalleriesComponent implements OnInit {
 
   @ViewChild("myPictureViewChild", {static:false}) pictureInput ?: ElementRef;
   @ViewChild("newCoverPicture", {static:false}) newPictureInput ?: ElementRef;
+  @ViewChild("addPicture", {static:false}) addPictureInput ?: ElementRef;
 
   name : string = "";
   isPublic : boolean = false;
@@ -26,7 +28,7 @@ export class MyGalleriesComponent implements OnInit {
   username : string = "";
 
 
-  constructor(public http : HttpClient, public service : GalleryServices) { }
+  constructor(public http : HttpClient, public service : GalleryServices, public iService : ImageServices) { }
 
   async ngOnInit() 
   {
@@ -68,5 +70,11 @@ export class MyGalleriesComponent implements OnInit {
   async setNewGaleryCover(){
     await this.service.setCoverPicture(this.galeryId, this.newPictureInput);
     this.galeries = await this.service.getMyGaleries();
+  }
+
+  async addImageToGalery(){
+    if(this.addPictureInput != undefined){
+      await this.iService.addPicture(this.addPictureInput, this.galeryId);
+    }
   }
 }

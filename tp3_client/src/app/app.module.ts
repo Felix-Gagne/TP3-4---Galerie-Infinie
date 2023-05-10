@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { GalleryServices } from './services/gallery-services';
 import { UserServices } from './services/user-services';
 import { AuthInterceptor } from './auth.interceptor';
+import { ImageServices } from './services/image-services';
 
 @NgModule({
   declarations: [				
@@ -33,6 +34,7 @@ import { AuthInterceptor } from './auth.interceptor';
   ],
   providers: [GalleryServices,
   UserServices,
+  ImageServices,
   {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true}],
   bootstrap: [AppComponent]
 })

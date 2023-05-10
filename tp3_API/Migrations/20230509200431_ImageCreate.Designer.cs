@@ -12,8 +12,8 @@ using tp3_API.Data;
 namespace tp3_API.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20230414214040_SecondSeed")]
-    partial class SecondSeed
+    [Migration("20230509200431_ImageCreate")]
+    partial class ImageCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -192,12 +192,14 @@ namespace tp3_API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("DefaultImage")
-                        .IsRequired()
+                    b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsPublic")
                         .HasColumnType("bit");
+
+                    b.Property<string>("MimeType")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -211,17 +213,39 @@ namespace tp3_API.Migrations
                         new
                         {
                             Id = 1,
-                            DefaultImage = "/assets/images/galleryThumbnail.png",
                             IsPublic = true,
                             Name = "Test Publique"
                         },
                         new
                         {
                             Id = 2,
-                            DefaultImage = "/assets/images/galleryThumbnail.png",
                             IsPublic = false,
                             Name = "Test Privée"
                         });
+                });
+
+            modelBuilder.Entity("tp3_API.Models.Images", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("GaleryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MimeType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GaleryId");
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("tp3_API.Models.User", b =>
@@ -293,15 +317,15 @@ namespace tp3_API.Migrations
                         {
                             Id = "11111111-1111-1111-1111-11111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1c9724dc-299f-42ec-ad15-cad06239f4b1",
+                            ConcurrencyStamp = "511ea715-9f77-438a-ba3e-c6e088784924",
                             Email = "user1@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@GMAIL.COM",
                             NormalizedUserName = "USER1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOGCKbVr0xiIdl2jX/wIxvFmi4PIWxHkHb7oursmrNZOJkcJws0YqFLzDf10zEe33g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPHLaX9yL89w+mDrKi/D6djCP5VFDh+HXGa5iJy8T/xBZtk/WrU/xqmP0ScNGSKGYA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "49e7d854-7437-45e2-a19d-3bfdc9d504bf",
+                            SecurityStamp = "63ac8740-0ed1-4ae1-a205-75a5f81043cd",
                             TwoFactorEnabled = false,
                             UserName = "user1"
                         },
@@ -309,15 +333,15 @@ namespace tp3_API.Migrations
                         {
                             Id = "11111111-1111-1111-1111-11111112",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0d3ad7de-6885-4a5a-8708-e345e8fb53a7",
+                            ConcurrencyStamp = "fe4d3dc2-2979-43a9-855b-ac6bb0dc2bae",
                             Email = "user2@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER2@GMAIL.COM",
                             NormalizedUserName = "USER2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGaoa2OHyp1RIaaEIJprn693PEa1ri4MeD9pnrSyhPX1kgnvWXwciMpj318eIoOXfQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH6euBnNhnnL3DgfgkJbtEzOQYKounTq86ZhjHEHCwjjPpFZu1m/BESMLSU/YEphPw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6a088b3c-bc83-41b3-8ab1-944b1eba210c",
+                            SecurityStamp = "03d67d0b-1ce7-47ec-bc91-83f1d4dee90e",
                             TwoFactorEnabled = false,
                             UserName = "user2"
                         });
@@ -387,6 +411,20 @@ namespace tp3_API.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("tp3_API.Models.Images", b =>
+                {
+                    b.HasOne("tp3_API.Models.Galery", "Galery")
+                        .WithMany("Images")
+                        .HasForeignKey("GaleryId");
+
+                    b.Navigation("Galery");
+                });
+
+            modelBuilder.Entity("tp3_API.Models.Galery", b =>
+                {
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }
