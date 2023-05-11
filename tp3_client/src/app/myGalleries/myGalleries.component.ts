@@ -64,7 +64,6 @@ export class MyGalleriesComponent implements OnInit {
   {
     this.galeryId = id;
     this.galeryName = name;
-    console.log(this.galeryId, this.galeryName);
   }
 
   async addImageToGalery(){

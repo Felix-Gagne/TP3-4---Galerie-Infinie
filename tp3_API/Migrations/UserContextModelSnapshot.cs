@@ -319,15 +319,15 @@ namespace tp3_API.Migrations
                         {
                             Id = "11111111-1111-1111-1111-11111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "27db89aa-b76e-4a20-8282-075585f0d001",
+                            ConcurrencyStamp = "244f72e6-2807-4f5d-b2c8-9f98a9af756e",
                             Email = "user1@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@GMAIL.COM",
                             NormalizedUserName = "USER1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEETXJ2hqIoB4ejQHGtcWNczuVJoJlGtVwAXUJ9DIK9+bXhTMPcJ5II/zNHdNMfRlWg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBBxG97ob9sSXUMI9ZYrAyG1F+j/jNaDph5h0JPXYBfhe3MbFpkVYy2XXwFEKF7jCQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "803c8d47-051f-4cfe-bd7f-5a1cd95d7444",
+                            SecurityStamp = "b3d522cc-0ec1-4c5f-853b-a21937d2ea81",
                             TwoFactorEnabled = false,
                             UserName = "user1"
                         },
@@ -335,15 +335,15 @@ namespace tp3_API.Migrations
                         {
                             Id = "11111111-1111-1111-1111-11111112",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fb2efa4c-9633-450a-bd0f-95a5138b976d",
+                            ConcurrencyStamp = "8305ac18-cbe4-426d-91b1-7e51bb206ac2",
                             Email = "user2@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER2@GMAIL.COM",
                             NormalizedUserName = "USER2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDB++xtgCowhsd2/tKc7wFRLt5Bn/P89Ion2ZwFZLyZOGP7ycr5wmoC6ZJe5laBCWQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMJE8o0uqWKfIX5cqbZlbd90qU7ximKfXHhDIYC2PvFQHZeIm2y9JTk1S+LmXq6Yfw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "56aab699-1706-489f-b1ae-f28bf5249737",
+                            SecurityStamp = "57cca29e-c5b1-4c70-837c-5720843062f4",
                             TwoFactorEnabled = false,
                             UserName = "user2"
                         });

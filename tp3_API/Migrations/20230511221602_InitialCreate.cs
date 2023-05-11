@@ -219,8 +219,8 @@ namespace tp3_API.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "11111111-1111-1111-1111-11111111", 0, "27db89aa-b76e-4a20-8282-075585f0d001", "user1@gmail.com", false, false, null, "USER1@GMAIL.COM", "USER1", "AQAAAAEAACcQAAAAEETXJ2hqIoB4ejQHGtcWNczuVJoJlGtVwAXUJ9DIK9+bXhTMPcJ5II/zNHdNMfRlWg==", null, false, "803c8d47-051f-4cfe-bd7f-5a1cd95d7444", false, "user1" },
-                    { "11111111-1111-1111-1111-11111112", 0, "fb2efa4c-9633-450a-bd0f-95a5138b976d", "user2@gmail.com", false, false, null, "USER2@GMAIL.COM", "USER2", "AQAAAAEAACcQAAAAEDB++xtgCowhsd2/tKc7wFRLt5Bn/P89Ion2ZwFZLyZOGP7ycr5wmoC6ZJe5laBCWQ==", null, false, "56aab699-1706-489f-b1ae-f28bf5249737", false, "user2" }
+                    { "11111111-1111-1111-1111-11111111", 0, "244f72e6-2807-4f5d-b2c8-9f98a9af756e", "user1@gmail.com", false, false, null, "USER1@GMAIL.COM", "USER1", "AQAAAAEAACcQAAAAEBBxG97ob9sSXUMI9ZYrAyG1F+j/jNaDph5h0JPXYBfhe3MbFpkVYy2XXwFEKF7jCQ==", null, false, "b3d522cc-0ec1-4c5f-853b-a21937d2ea81", false, "user1" },
+                    { "11111111-1111-1111-1111-11111112", 0, "8305ac18-cbe4-426d-91b1-7e51bb206ac2", "user2@gmail.com", false, false, null, "USER2@GMAIL.COM", "USER2", "AQAAAAEAACcQAAAAEMJE8o0uqWKfIX5cqbZlbd90qU7ximKfXHhDIYC2PvFQHZeIm2y9JTk1S+LmXq6Yfw==", null, false, "57cca29e-c5b1-4c70-837c-5720843062f4", false, "user2" }
                 });
 
             migrationBuilder.InsertData(

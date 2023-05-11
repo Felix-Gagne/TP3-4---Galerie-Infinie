@@ -11,7 +11,7 @@
 
     <div class="col-1 galleryList">
       <!-- Photos de couverture de galeries -->
-     <div class="galleryThumbnail" *ngFor="let g of galeries">
+     <div class="galleryThumbnail" *ngFor="let g of galeries" (click)="getGaleryInfo(g.id, g.name)">
       <div>{{g.name}}</div>
       <img tabindex="0" alt="{{g.name}}" src="https://localhost:7219/api/Galery/getGaleryCoverPicture/{{g.id}}">
      </div>

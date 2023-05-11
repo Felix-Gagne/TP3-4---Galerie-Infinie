@@ -24,84 +24,39 @@ namespace tp3_API.Controllers
         }
 
         // GET: api/Images
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Images>>> GetImages()
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetImages(int id)
         {
-            if (_context.Images == null)
+            if (_context.Galery == null)
             {
                 return NotFound();
             }
-            return await _context.Images.ToListAsync();
-        }
-
-        // GET: api/Images/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<int>>> GetID(int id)
-        {
-            Galery galery = await _context.Galery.FindAsync(id);
-            if (galery == null || galery.Images == null)
+            Galery? galery = await _context.Galery.FindAsync(id);
+            if (galery == null || galery.FileName == null || galery.MimeType == null)
             {
-                return NotFound("La galerie n'existe pas ou elle ne contient aucune images.");
+                return NotFound(new { Message = "Cette galerie n'a pas de photo." });
             }
-            else
-            {
-                List<int> ids = new List<int>();
-                foreach(var i in galery.Images)
-                {
-                    ids.Add(i.Id);
-                }
-                return ids;
-            }        
-
-            return NoContent();
+            byte[] bytes = System.IO.File.ReadAllBytes(Directory.GetCurrentDirectory() + "/images/cover/" + galery.FileName);
+            return File(bytes, galery.MimeType);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<Images>>> GetImages(int id)
+        public async Task<ActionResult<IEnumerable<int>>> GetImagesId(int id)
         {
-            Images img = await _context.Images.FindAsync(id);
-
-            if(img == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                byte[] bytes = System.IO.File.ReadAllBytes(Directory.GetCurrentDirectory() + "/images/original/" + img.FileName);
-                return File(bytes, img.FileName);
-            }
-        }
-
-        // PUT: api/Images/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutImages(int id, Images images)
-        {
-            if (id != images.Id)
+            var galery = await _context.Galery.FindAsync(id);
+            if(galery == null)
             {
                 return BadRequest();
             }
-
-            _context.Entry(images).State = EntityState.Modified;
-
-            try
+            List<int> ids = new List<int>();
+            foreach(var i in galery.Images)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ImagesExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                ids.Add(i.Id);
             }
 
-            return NoContent();
+            return Ok(ids);
         }
+
 
         // POST: api/Images
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

@@ -12,6 +12,10 @@ export class PublicGalleriesComponent implements OnInit {
 
   galeries : Galery[] = [];
 
+  galeryId : number = 0;
+
+  galeryName : String = "";
+
   constructor(public http : HttpClient) { }
 
   async ngOnInit() 
@@ -20,19 +24,17 @@ export class PublicGalleriesComponent implements OnInit {
   }
 
   async getPublicGaleries() : Promise<void>{
-    
-    let token = localStorage.getItem("token");
-
-    let httpOptions = {
-      headers : new HttpHeaders({
-        'Content-Type' : 'application/json',
-        'Authorization' : 'Bearer ' + token
-      })
-    };
-
-    let x = await lastValueFrom(this.http.get<Galery[]>("https://localhost:7219/api/Galery/GetPublicGaleries", httpOptions));
+    let x = await lastValueFrom(this.http.get<Galery[]>("https://localhost:7219/api/Galery/GetPublicGaleries"));
     console.log(x);
     this.galeries = x;
   }
+
+  async getGaleryInfo(id : number, name : string)
+  {
+    this.galeryId = id;
+    this.galeryName = name;
+    console.log(this.galeryId, this.galeryName);
+  }
+
 
 }

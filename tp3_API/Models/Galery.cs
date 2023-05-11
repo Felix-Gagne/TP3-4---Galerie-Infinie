@@ -19,6 +19,7 @@ namespace tp3_API.Models
         [JsonIgnore]
         public virtual List<User>? AllowedUser { get; set; }
 
+        [JsonIgnore]
         public virtual List<Images>? Images { get; set; }
     }
 }
