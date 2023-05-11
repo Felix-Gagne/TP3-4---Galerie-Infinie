@@ -13,7 +13,7 @@
       <!-- Photos de couverture de galeries -->
      <div class="galleryThumbnail" *ngFor="let g of galeries">
       <div>{{g.name}}</div>
-      <img src="/assets/images/galleryThumbnail.png" alt="Galerie #1">
+      <img tabindex="0" alt="{{g.name}}" src="https://localhost:7219/api/Galery/getGaleryCoverPicture/{{g.id}}">
      </div>
 
     </div>

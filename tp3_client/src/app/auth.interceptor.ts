@@ -16,8 +16,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
     if(request.url != "https://localhost:7219/api/Users/Register")
     {
-      if(request.url != "https://localhost:7219/api/Users/Login"){
-
+      if(request.url != "https://localhost:7219/api/Users/Login")
+      {
         console.log(localStorage.getItem("token"));
 
         request = request.clone({

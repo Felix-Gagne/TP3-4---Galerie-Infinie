@@ -17,7 +17,6 @@ namespace tp3_API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    //[Authorize]
     public class GaleryController : ControllerBase
     {
         private readonly UserContext _context;
@@ -29,6 +28,7 @@ namespace tp3_API.Controllers
 
         // GET USER GALERY
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Galery>>> GetGalery()
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -48,20 +48,38 @@ namespace tp3_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Galery>>> GetPublicGaleries()
         {
-            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            User user = _context.Users.Single(u => u.Id == userId);
 
-            if (user == null)
+            try
             {
-                return BadRequest();
+                string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                User user = _context.Users.Single(u => u.Id == userId);
+
+                if (user == null)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    List<Galery> galeries = new List<Galery>();
+
+                    foreach (Galery g in _context.Galery)
+                    {
+                        if (g.IsPublic == true && !g.AllowedUser.Contains(user))
+                        {
+                            galeries.Add(g);
+                        }
+                    }
+
+                    return galeries;
+                }
             }
-            else
+            catch (Exception ex)
             {
                 List<Galery> galeries = new List<Galery>();
 
-                foreach(Galery g in _context.Galery)
+                foreach (Galery g in _context.Galery)
                 {
-                    if(g.IsPublic == true && !g.AllowedUser.Contains(user))
+                    if (g.IsPublic == true)
                     {
                         galeries.Add(g);
                     }
@@ -74,6 +92,7 @@ namespace tp3_API.Controllers
         // POST: api/Galery
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Galery>> PostGalery()
         {
             //Trouver un utilisateur via son token
@@ -115,6 +134,13 @@ namespace tp3_API.Controllers
                         galery.FileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                         galery.MimeType = file.ContentType;
 
+                        image.Mutate(i =>
+                        i.Resize(new ResizeOptions()
+                        {
+                            Mode = ResizeMode.Min,
+                            Size = new Size() { Width = 500, Height = 200 }
+                        })
+                        );
                         image.Save(Directory.GetCurrentDirectory() + "/images/cover/" + galery.FileName);
                     }
                     else
@@ -137,6 +163,7 @@ namespace tp3_API.Controllers
 
         // ADD A USER
         [HttpPut("{id}/{username}")]
+        [Authorize]
         public async Task<IActionResult> AddUser(int id, string username)
         {
             var galery = await _context.Galery.FindAsync(id);
@@ -170,6 +197,7 @@ namespace tp3_API.Controllers
 
         //MAKE IT PUBLIC
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> MakePublic(int id)
         {
             var galery = await _context.Galery.FindAsync(id);
@@ -195,6 +223,7 @@ namespace tp3_API.Controllers
 
         //MAKE IT PRIVATE
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> MakePrivate(int id)
         {
             var galery = await _context.Galery.FindAsync(id);
@@ -222,6 +251,7 @@ namespace tp3_API.Controllers
 
         // DELETE: api/Galery/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteGalery(int id)
         {
             var gallery = await _context.Galery.FindAsync(id);
@@ -246,6 +276,8 @@ namespace tp3_API.Controllers
             }
 
             gallery.AllowedUser.Clear();
+
+            System.IO.File.Delete(Directory.GetCurrentDirectory() + "/images/cover/" + gallery.FileName);
 
             _context.Galery.Remove(gallery);
             await _context.SaveChangesAsync();

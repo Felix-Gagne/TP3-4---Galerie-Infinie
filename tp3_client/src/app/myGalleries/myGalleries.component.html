@@ -56,15 +56,16 @@
         <!-- Supprimer la galerie -->
         <div class="option">
           <button mat-raised-button color="warn" (click)="deleteGallery()">Supprimer la galerie <mat-icon>delete</mat-icon></button>
+          <button mat-raised-button color="warn">Supprimer une images<mat-icon>delete</mat-icon></button>
         </div>
-        
+
         <div class="option">
           <input #addPicture type="file" name="picture">
           <button mat-raised-button (click)="addImageToGalery()">Ajouter une photo <mat-icon>note_add</mat-icon></button>
         </div>
 
-      </div>
 
+      </div>
       <hr>
       <!-- Photos de la galerie sélectionnée -->
       <h2>Photos de la galerie sélectionnée <mat-icon>photo_camera</mat-icon></h2>
