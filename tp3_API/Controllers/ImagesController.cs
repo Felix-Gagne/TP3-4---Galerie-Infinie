@@ -100,8 +100,7 @@ namespace tp3_API.Controllers
                         Mode = ResizeMode.Min,
                         Size = new Size()
                         {
-                            Width = 279,
-                            Height = 279
+                            Width = 300
                         }
                     }));
                     image.Save(Directory.GetCurrentDirectory() + "/images/miniature/" + images.FileName);
@@ -158,6 +157,8 @@ namespace tp3_API.Controllers
             _context.Images.Remove(image);
             System.IO.File.Delete(Directory.GetCurrentDirectory() + "/images/miniature/" + image.FileName);
             System.IO.File.Delete(Directory.GetCurrentDirectory() + "/images/original/" + image.FileName);
+
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }

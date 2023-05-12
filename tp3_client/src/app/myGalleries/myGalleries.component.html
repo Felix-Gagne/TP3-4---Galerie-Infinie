@@ -13,7 +13,7 @@
       <!-- Photos de couverture de galeries -->
      <div class="galleryThumbnail" *ngFor="let g of galeries" (click)="getGaleryInfo(g.id, g.name)">
       <div>{{g.name}}</div>
-      <img tabindex="0" alt="{{g.name}}" src="https://localhost:7219/api/Galery/getGaleryCoverPicture/{{g.id}}">
+      <img tabindex="0" alt="{{g.name}}" src="https://localhost:7219/api/Galery/getGaleryCoverPicture/{{g.id}}/{{g.fileName}}">
      </div>
 
     </div>
@@ -38,7 +38,7 @@
        <div class="options">
         <!-- Changer la couverture -->
         <div class="option">
-          <input #newCoverPicture type="file" name="newGalleryCoverPicture" accept="images/*"><button mat-raised-button>Changer la couverture <mat-icon>photo_library</mat-icon></button>
+          <input #newCoverPicture type="file" name="newGalleryCoverPicture" accept="images/*"><button (click)="changeCover()" mat-raised-button>Changer la couverture <mat-icon>photo_library</mat-icon></button>
         </div>
 
         <!-- Partager la galerie -->
@@ -56,20 +56,26 @@
         <!-- Supprimer la galerie -->
         <div class="option">
           <button mat-raised-button color="warn" (click)="deleteGallery()">Supprimer la galerie <mat-icon>delete</mat-icon></button>
-          <button mat-raised-button color="warn" (click)="deleteImages()">Supprimer une images<mat-icon>delete</mat-icon></button>
         </div>
+       </div>
 
-        <div class="option">
-          <input #addPicture type="file" name="picture">
-          <button mat-raised-button (click)="addImageToGalery()">Ajouter une photo <mat-icon>note_add</mat-icon></button>
-        </div>
-
-
-      </div>
+       <hr>
+       <h3>Modifier les images : </h3>
+        <div class="options">
+          <div class="option">
+            <input #addPicture type="file" name="picture">
+            <button mat-raised-button (click)="addImageToGalery()">Ajouter une photo <mat-icon>note_add</mat-icon></button>
+            <button mat-raised-button color="warn" (click)="deleteImages()">Supprimer une images<mat-icon>delete</mat-icon></button>
+          </div>
+        </div>    
       <hr>
       <!-- Photos de la galerie sélectionnée -->
       <h2>Photos de la galerie sélectionnée <mat-icon>photo_camera</mat-icon></h2>
-      <img tabindex="0" *ngFor="let i of images" (click)="getImageId(i.id)"  alt="{{i.id}}" src="https://localhost:7219/api/Images/ShowImages/miniature/{{i.id}}">
+      <div class="grid" #masongrid>
+        <div #masongriditems class="grid-item" *ngFor="let i of images">
+          <img tabindex="0" (click)="getImageId(i.id)"  alt="{{i.id}}" src="https://localhost:7219/api/Images/ShowImages/miniature/{{i.id}}">
+        </div>
+      </div>
     </div>
 
   </div>

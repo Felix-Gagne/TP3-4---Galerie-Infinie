@@ -138,14 +138,15 @@ namespace tp3_API.Controllers
                         i.Resize(new ResizeOptions()
                         {
                             Mode = ResizeMode.Min,
-                            Size = new Size() { Width = 500, Height = 200 }
+                            Size = new Size() { Width = 252 }
                         })
                         );
                         image.Save(Directory.GetCurrentDirectory() + "/images/cover/" + galery.FileName);
                     }
                     else
                     {
-                        return NotFound(new { Message = "Aucune image fournie" });
+                        galery.FileName = "11111111-1111-1111-1111-111111111111.png";
+                        galery.MimeType = "image/png";
                     }
                 }
                 catch (Exception)
@@ -292,8 +293,8 @@ namespace tp3_API.Controllers
             return NoContent();
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult> getGaleryCoverPicture(int id)
+        [HttpGet("{id}/{FileName}")]
+        public async Task<ActionResult> getGaleryCoverPicture(int id, string FileName)
         {
             if(_context.Galery == null)
             {
@@ -306,6 +307,62 @@ namespace tp3_API.Controllers
             }
             byte[] bytes = System.IO.File.ReadAllBytes(Directory.GetCurrentDirectory() + "/images/cover/" + galery.FileName);
             return File(bytes, galery.MimeType);
+        }
+
+        //Change cover picture
+        [HttpPut("{id}")]
+        [Authorize]
+        public async Task<IActionResult> ChangeCoverPicture(int id)
+        {
+            var galery = await _context.Galery.FindAsync(id);
+            if (galery == null)
+            {
+                return NotFound();
+            }
+
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            User user = _context.Users.Single(u => u.Id == userId);
+
+            if (!galery.AllowedUser.Contains(user))
+            {
+                return BadRequest();
+            }
+
+
+            try
+            {
+                IFormCollection formCollection = await Request.ReadFormAsync();
+                IFormFile? file = formCollection.Files.GetFile("monImage");
+                if (file != null)
+                {
+                    Image image = Image.Load(file.OpenReadStream());
+
+                    galery.FileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    galery.MimeType = file.ContentType;
+
+                    image.Mutate(i =>
+                    i.Resize(new ResizeOptions()
+                    {
+                        Mode = ResizeMode.Min,
+                        Size = new Size() { Width = 252 }
+                    })
+                    );
+                    image.Save(Directory.GetCurrentDirectory() + "/images/cover/" + galery.FileName);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+
         }
 
         private bool GaleryExists(int id)

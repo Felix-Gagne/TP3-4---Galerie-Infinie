@@ -1,10 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { Galery } from '../Models/Galery';
 import { GalleryServices } from '../services/gallery-services';
 import { ImageServices } from '../services/image-services';
 import { Image } from '../Models/image';
+
+declare var Masonry : any;
+declare var imagesLoaded : any;
 
 @Component({
   selector: 'app-myGalleries',
@@ -14,8 +17,11 @@ import { Image } from '../Models/image';
 export class MyGalleriesComponent implements OnInit {
 
   @ViewChild("myPictureViewChild", {static:false}) pictureInput ?: ElementRef;
-  @ViewChild("newCoverPicture", {static:false}) newPictureInput ?: ElementRef;
+  @ViewChild("newCoverPicture", {static:false}) newCoverInput ?: ElementRef;
   @ViewChild("addPicture", {static:false}) addPictureInput ?: ElementRef;
+
+  @ViewChild("masongrid") masongrid ?: ElementRef;
+  @ViewChildren("masongriditems") masongriditems ?: QueryList<any>;
 
   name : string = "";
   isPublic : boolean = false;
@@ -39,6 +45,29 @@ export class MyGalleriesComponent implements OnInit {
   {
     this.galeries = await this.service.getMyGaleries();
   }
+
+  ngAfterViewInit() { 
+        this.masongriditems?.changes.subscribe(e => { 
+          this.initMasonry(); 
+        }); 
+      
+        if(this.masongriditems!.length > 0) { 
+          this.initMasonry(); 
+        } 
+      } 
+    
+      initMasonry() { 
+        var grid = this.masongrid?.nativeElement; 
+        var msnry = new Masonry( grid, { 
+          itemSelector: '.grid-item',
+          columnWidth:320, // À modifier si le résultat est moche
+          gutter:3
+        });
+       
+        imagesLoaded( grid ).on( 'progress', function() { 
+          msnry.layout(); 
+        }); 
+      } 
 
   async createNewGalery(){
     await this.service.newGalery(this.name, this.isPublic, this.pictureInput);
@@ -82,6 +111,7 @@ export class MyGalleriesComponent implements OnInit {
   async addImageToGalery(){
     if(this.addPictureInput != undefined){
       await this.iService.addPicture(this.addPictureInput, this.galeryId);
+      await this.getGaleryInfo(this.galeryId, this.galeryName);
     }
   }
 
@@ -92,5 +122,11 @@ export class MyGalleriesComponent implements OnInit {
 
   async deleteImages(){
     await this.iService.deletePicture(this.imageId, this.galeryId);
+    await this.getGaleryInfo(this.galeryId, this.galeryName);
+  }
+
+  async changeCover():Promise<any>{
+    await this.service.changeCover(this.galeryId, this.newCoverInput);
+    this.galeries = await this.service.getMyGaleries();
   }
 }
