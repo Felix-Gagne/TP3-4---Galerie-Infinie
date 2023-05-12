@@ -50,4 +50,8 @@ export class ImageServices
 
         return images;
     }
+
+    async deletePicture(id : number, galeryId : number){
+        let x = await lastValueFrom(this.http.delete<any>("https://localhost:7219/api/Images/DeleteImages/" + id + "/" + galeryId));
+    }
 }

@@ -277,6 +277,13 @@ namespace tp3_API.Controllers
 
             gallery.AllowedUser.Clear();
 
+            foreach(Images i in gallery.Images)
+            {
+                System.IO.File.Delete(Directory.GetCurrentDirectory() + "/images/miniature/" + i.FileName);
+                System.IO.File.Delete(Directory.GetCurrentDirectory() + "/images/original/" + i.FileName);
+                _context.Images.Remove(i);
+            }
+
             System.IO.File.Delete(Directory.GetCurrentDirectory() + "/images/cover/" + gallery.FileName);
 
             _context.Galery.Remove(gallery);

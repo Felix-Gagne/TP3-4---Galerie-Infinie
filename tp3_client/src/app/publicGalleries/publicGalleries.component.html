@@ -21,7 +21,7 @@
     <div class="col-4">
       <!-- Photo de la galerie sélectionnée (Partie 2 !) -->
       <h2>Photos de la galerie sélectionnée <mat-icon>photo_camera</mat-icon></h2>
-      <img *ngFor="let i of images" tabindex="0" alt="{{i.id}}" src="https://localhost:7219/api/Images/ShowImages/{{i.id}}">
+      <img *ngFor="let i of images" tabindex="0" alt="{{i.id}}" src="https://localhost:7219/api/Images/ShowImages/miniature/{{i.id}}">
     </div>
 
   </div>

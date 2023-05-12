@@ -4,6 +4,7 @@ import { lastValueFrom } from 'rxjs';
 import { Galery } from '../Models/Galery';
 import { GalleryServices } from '../services/gallery-services';
 import { ImageServices } from '../services/image-services';
+import { Image } from '../Models/image';
 
 @Component({
   selector: 'app-myGalleries',
@@ -26,6 +27,10 @@ export class MyGalleriesComponent implements OnInit {
   galeryName : string = "";
 
   username : string = "";
+
+  imageId : number = 0;
+
+  images : Image[] = [];
 
 
   constructor(public http : HttpClient, public service : GalleryServices, public iService : ImageServices) { }
@@ -60,15 +65,32 @@ export class MyGalleriesComponent implements OnInit {
     this.galeries = await this.service.getMyGaleries();
   }
 
-  getGaleryInfo(id : number, name : string)
+  async getGaleryInfo(id : number, name : string)
   {
     this.galeryId = id;
     this.galeryName = name;
+
+    if(this.images == null){
+      this.images = await this.iService.getPictures(this.galeryId);
+    }
+    else{
+      this.images = [];
+      this.images = await this.iService.getPictures(this.galeryId);
+    }
   }
 
   async addImageToGalery(){
     if(this.addPictureInput != undefined){
       await this.iService.addPicture(this.addPictureInput, this.galeryId);
     }
+  }
+
+  getImageId(id : number){
+    this.imageId = id;
+    console.log(this.imageId);
+  }
+
+  async deleteImages(){
+    await this.iService.deletePicture(this.imageId, this.galeryId);
   }
 }

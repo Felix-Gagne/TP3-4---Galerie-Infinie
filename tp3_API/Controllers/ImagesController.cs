@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -24,8 +25,8 @@ namespace tp3_API.Controllers
         }
 
         // GET: api/Images
-        [HttpGet("{id}")]
-        public async Task<ActionResult> ShowImages(int id)
+        [HttpGet("{size}/{id}")]
+        public async Task<ActionResult> ShowImages(String size,int id)
         {
             if (_context.Images == null)
             {
@@ -36,7 +37,11 @@ namespace tp3_API.Controllers
             {
                 return NotFound(new { Message = "Cette image n'existe pas." });
             }
-            byte[] bytes = System.IO.File.ReadAllBytes(Directory.GetCurrentDirectory() + "/images/original/" + image.FileName);
+            if(!(Regex.Match(size, "original|miniature").Success))
+            {
+                return BadRequest(new { Message = "La taille demander est inadequate." });
+            }
+            byte[] bytes = System.IO.File.ReadAllBytes(Directory.GetCurrentDirectory() + "/images/miniature/" + image.FileName);
             return File(bytes, image.MimeType);
         }
 
@@ -89,11 +94,32 @@ namespace tp3_API.Controllers
                     images.MimeType = file.ContentType;
 
                     image.Save(Directory.GetCurrentDirectory() + "/images/original/" + images.FileName);
+                    image.Mutate(i =>
+                    i.Resize(new ResizeOptions()
+                    {
+                        Mode = ResizeMode.Min,
+                        Size = new Size()
+                        {
+                            Width = 279,
+                            Height = 279
+                        }
+                    }));
+                    image.Save(Directory.GetCurrentDirectory() + "/images/miniature/" + images.FileName);
 
-                    galery.Images = new List<Images>();
-                    galery.Images.Add(images);
-
-                    images.Galery = galery;
+                    if(galery != null || images != null)
+                    {
+                        if(galery.Images == null)
+                        {
+                            galery.Images = new List<Images>();
+                            galery.Images.Add(images);
+                            images.Galery = galery;
+                        }
+                        else
+                        {
+                            galery.Images.Add(images);
+                            images.Galery = galery;
+                        }
+                    }
 
                     _context.Images.Add(images);
                     await _context.SaveChangesAsync();
@@ -111,21 +137,27 @@ namespace tp3_API.Controllers
         }
 
     // DELETE: api/Images/5
-    [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteImages(int id)
+    [HttpDelete("{id}/{galleryId}")]
+        public async Task<IActionResult> DeleteImages(int id, int galleryId)
         {
             if (_context.Images == null)
             {
                 return NotFound();
             }
-            var images = await _context.Images.FindAsync(id);
-            if (images == null)
+            Images? image = await _context.Images.FindAsync(id);
+            if (image == null || image.FileName == null || image.MimeType == null)
+            {
+                return NotFound(new { Message = "Cette image n'existe pas." });
+            }
+            var galery = await _context.Galery.FindAsync(galleryId);
+            if (galery == null)
             {
                 return NotFound();
             }
 
-            _context.Images.Remove(images);
-            await _context.SaveChangesAsync();
+            _context.Images.Remove(image);
+            System.IO.File.Delete(Directory.GetCurrentDirectory() + "/images/miniature/" + image.FileName);
+            System.IO.File.Delete(Directory.GetCurrentDirectory() + "/images/original/" + image.FileName);
 
             return NoContent();
         }
