@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ElementRef } from "@angular/core";
 import { lastValueFrom } from "rxjs";
 import { Injectable } from '@angular/core';
+import { Image } from "../Models/image";
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +10,9 @@ import { Injectable } from '@angular/core';
 
 export class ImageServices 
 {   
-constructor(public http : HttpClient){}
+    constructor(public http : HttpClient){}
+
+
 
     async addPicture(addPictureInput : ElementRef, galeryId : number) : Promise<void>
     {
@@ -32,5 +35,19 @@ constructor(public http : HttpClient){}
 
         let x  = await lastValueFrom(this.http.post<any>("https://localhost:7219/api/Images/addImageToGalery/" + galeryId, formData));
         console.log(x);
+    }
+
+    async getPictures(galeryId : number) : Promise<Image[]>
+    {
+        let x = await lastValueFrom(this.http.get<Image[]>("https://localhost:7219/api/Images/GetImages/" + galeryId));
+        console.log(x);
+        
+        let images : Image[];
+
+        images = x;
+
+        console.log(images);
+
+        return images;
     }
 }

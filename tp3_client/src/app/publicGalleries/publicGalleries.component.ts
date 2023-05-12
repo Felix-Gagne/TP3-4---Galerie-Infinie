@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { Galery } from '../Models/Galery';
+import { Image } from '../Models/image';
+import { ImageServices } from '../services/image-services';
 
 @Component({
   selector: 'app-publicGalleries',
@@ -16,7 +18,9 @@ export class PublicGalleriesComponent implements OnInit {
 
   galeryName : String = "";
 
-  constructor(public http : HttpClient) { }
+  images : Image[] = [];
+
+  constructor(public http : HttpClient, public iService : ImageServices) { }
 
   async ngOnInit() 
   {
@@ -33,8 +37,15 @@ export class PublicGalleriesComponent implements OnInit {
   {
     this.galeryId = id;
     this.galeryName = name;
+
+    if(this.images == null){
+      this.images = await this.iService.getPictures(this.galeryId);
+    }
+    else{
+      this.images = [];
+      this.images = await this.iService.getPictures(this.galeryId);
+    }
+
     console.log(this.galeryId, this.galeryName);
   }
-
-
 }

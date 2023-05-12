@@ -25,36 +25,33 @@ namespace tp3_API.Controllers
 
         // GET: api/Images
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetImages(int id)
+        public async Task<ActionResult> ShowImages(int id)
         {
-            if (_context.Galery == null)
+            if (_context.Images == null)
             {
                 return NotFound();
             }
-            Galery? galery = await _context.Galery.FindAsync(id);
-            if (galery == null || galery.FileName == null || galery.MimeType == null)
+            Images? image = await _context.Images.FindAsync(id);
+            if (image == null || image.FileName == null || image.MimeType == null)
             {
-                return NotFound(new { Message = "Cette galerie n'a pas de photo." });
+                return NotFound(new { Message = "Cette image n'existe pas." });
             }
-            byte[] bytes = System.IO.File.ReadAllBytes(Directory.GetCurrentDirectory() + "/images/cover/" + galery.FileName);
-            return File(bytes, galery.MimeType);
+            byte[] bytes = System.IO.File.ReadAllBytes(Directory.GetCurrentDirectory() + "/images/original/" + image.FileName);
+            return File(bytes, image.MimeType);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<int>>> GetImagesId(int id)
+        public async Task<ActionResult<IEnumerable<Images>>> GetImages(int id)
         {
             var galery = await _context.Galery.FindAsync(id);
             if(galery == null)
             {
                 return BadRequest();
             }
-            List<int> ids = new List<int>();
-            foreach(var i in galery.Images)
+            else
             {
-                ids.Add(i.Id);
+                return galery.Images;
             }
-
-            return Ok(ids);
         }
 
 
