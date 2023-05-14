@@ -56,6 +56,28 @@ namespace tp3_API.Data
                     e.HasData(new { AllowedUserId = u2.Id, GaleryId = 2 });
 
                 });
+
+            builder.Entity<Images>().HasData(
+                    new { Id = 1, FileName = "11111111-1111-1111-1111-111111111111.jpg", MimeType = "image/jpg", GaleryId = 1}
+                );
+
+            byte[] file = System.IO.File.ReadAllBytes(Directory.GetCurrentDirectory() + "/images/original/11111111-1111-1111-1111-111111111111.jpg");
+            Image image = Image.Load(file);
+
+            image.Mutate(i =>
+                i.Resize(new ResizeOptions()
+                {
+                    Mode = ResizeMode.Min,
+                    Size = new Size()
+                    {
+                        Width = 300
+                    }
+                })
+            );
+
+            image.Save(Directory.GetCurrentDirectory() + "/images/miniature/11111111-1111-1111-1111-111111111111.jpg");
+
+
         }
 
         public DbSet<tp3_API.Models.Galery> Galery { get; set; } = default!;

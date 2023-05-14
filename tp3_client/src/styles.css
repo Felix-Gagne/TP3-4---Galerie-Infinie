@@ -106,3 +106,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .option button{
     margin:0px 10px 0px 10px;
 }
+
+.onFocus:focus {
+    outline: 4px solid black;
+  }

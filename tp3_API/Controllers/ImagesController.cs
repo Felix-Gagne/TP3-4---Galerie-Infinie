@@ -41,7 +41,7 @@ namespace tp3_API.Controllers
             {
                 return BadRequest(new { Message = "La taille demander est inadequate." });
             }
-            byte[] bytes = System.IO.File.ReadAllBytes(Directory.GetCurrentDirectory() + "/images/miniature/" + image.FileName);
+            byte[] bytes = System.IO.File.ReadAllBytes(Directory.GetCurrentDirectory() + "/images/" + size + "/" + image.FileName);
             return File(bytes, image.MimeType);
         }
 

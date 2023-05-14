@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using tp3_API.Data;
 
@@ -11,9 +12,10 @@ using tp3_API.Data;
 namespace tp3_API.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230513231302_seedTest")]
+    partial class seedTest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -328,15 +330,15 @@ namespace tp3_API.Migrations
                         {
                             Id = "11111111-1111-1111-1111-11111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9ac879a4-603a-487c-8646-27b3edea98d2",
+                            ConcurrencyStamp = "0aed697d-36c3-44bb-86b4-cd2cb5b3cec6",
                             Email = "user1@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@GMAIL.COM",
                             NormalizedUserName = "USER1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOqhHVXY+OCrQwtvYXGhZ0JZ7o5yaQ71CJVjIkJsIDiGS8roKpMGG3GDx5/vhuaWWA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAa3czd+Q4W3yWosM55HbtKVXb+GMKyZyI7iQsE8JVIcdhT0E0GUfthYQSiNtG696A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c1a19a32-5dd6-45fb-85ee-09680f871ec8",
+                            SecurityStamp = "8805e8d6-9786-4b7c-8f2c-d4a066c3fa38",
                             TwoFactorEnabled = false,
                             UserName = "user1"
                         },
@@ -344,15 +346,15 @@ namespace tp3_API.Migrations
                         {
                             Id = "11111111-1111-1111-1111-11111112",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9796d95e-ed4f-48e0-a819-f06f89a8b758",
+                            ConcurrencyStamp = "f9c92eca-0996-4fad-8570-8f6ca282f4e3",
                             Email = "user2@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER2@GMAIL.COM",
                             NormalizedUserName = "USER2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH+tbzRiWsu9U2aIc5/5lrQxXiI0A2SVUFpUVSeUX3T/LsZ8wIAfF/kc3HDKo1u7ww==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECnPk415/3zRS931AAV4xLrxMmVhgh3ROy9y7I5ZMFDRJXqgJlXRXae95KLdbQGUBQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8889564e-a60e-474d-9ed1-960b73ca4292",
+                            SecurityStamp = "def9895b-aa92-4685-8916-0fccc1e17c3d",
                             TwoFactorEnabled = false,
                             UserName = "user2"
                         });

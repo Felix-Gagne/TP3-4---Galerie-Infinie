@@ -16,6 +16,8 @@ import { UserServices } from './services/user-services';
 import { AuthInterceptor } from './auth.interceptor';
 import { ImageServices } from './services/image-services';
 import { PicturePipe } from './pipe/picture.pipe';
+import { FullSizeImageComponent } from './full-size-image/full-size-image.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [				
@@ -24,7 +26,8 @@ import { PicturePipe } from './pipe/picture.pipe';
       PublicGalleriesComponent,
       MyGalleriesComponent,
       LoginComponent,
-      PicturePipe
+      PicturePipe,
+      FullSizeImageComponent
    ],
   imports: [
     BrowserModule,

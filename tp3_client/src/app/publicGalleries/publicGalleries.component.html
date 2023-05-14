@@ -11,9 +11,9 @@
 
     <div class="col-1 galleryList">
       <!-- Photos de couverture de galeries -->
-     <div class="galleryThumbnail" *ngFor="let g of galeries" (click)="getGaleryInfo(g.id, g.name)">
+     <div class="galleryThumbnail onFocus" *ngFor="let g of galeries" (click)="getGaleryInfo(g.id, g.name)">
       <div>{{g.name}}</div>
-      <img tabindex="0" alt="{{g.name}}" src="https://localhost:7219/api/Galery/getGaleryCoverPicture/{{g.id}}">
+      <img tabindex="0" alt="{{g.name}}" src="https://localhost:7219/api/Galery/getGaleryCoverPicture/{{g.id}}/{{g.fileName}}">
      </div>
 
     </div>
@@ -21,7 +21,11 @@
     <div class="col-4">
       <!-- Photo de la galerie sélectionnée (Partie 2 !) -->
       <h2>Photos de la galerie sélectionnée <mat-icon>photo_camera</mat-icon></h2>
-      <img *ngFor="let i of images" tabindex="0" alt="{{i.id}}" src="https://localhost:7219/api/Images/ShowImages/miniature/{{i.id}}">
+      <div class="grid" #masongrid>
+        <div #masongriditems class="grid-item" *ngFor="let i of images">
+          <img tabindex="0" class="onFocus" alt="{{i.id}}" src="https://localhost:7219/api/Images/ShowImages/miniature/{{i.id}}" (click)="getImageId(i.id)">
+        </div>
+      </div>
     </div>
 
   </div>
